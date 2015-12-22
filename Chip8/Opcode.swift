@@ -1,13 +1,15 @@
 //  Copyright © 2015 Indragie Karunaratne. All rights reserved.
 
-import Foundation
+public protocol OpcodeType {
+    var rawOpcode: UInt16 { get }
+    var textualDescription: String { get }
+}
 
 // From https://en.wikipedia.org/wiki/CHIP-8
-public enum Opcode: CustomStringConvertible {
+public enum Opcode: OpcodeType, CustomStringConvertible {
     public typealias Address = UInt16
     public typealias Register = UInt8
     public typealias Constant = UInt8
-    public typealias RawOpcode = UInt16
     
     case ClearScreen                                        // 00E0
     case Return                                             // 00EE
@@ -44,7 +46,7 @@ public enum Opcode: CustomStringConvertible {
     case WriteMemory(x: Register)                           // FX55
     case ReadMemory(x: Register)                            // FX65
     
-    public var rawOpcode: RawOpcode {
+    public var rawOpcode: UInt16 {
         let bigEndianValue: UInt16 = {
             switch self {
             case .ClearScreen:
@@ -197,7 +199,7 @@ public enum Opcode: CustomStringConvertible {
         return "Opcode{code=0x\(hex(rawOpcode)), description=\(textualDescription)}"
     }
     
-    public init?(rawOpcode: RawOpcode) {
+    public init?(rawOpcode: UInt16) {
         let instruction = rawOpcode.bigEndian
         let nib1 = UInt8((instruction & 0xF000) >> 12)
         let nib2 = UInt8((instruction & 0x0F00) >> 8)
@@ -281,4 +283,33 @@ public enum Opcode: CustomStringConvertible {
 
 private func hex<T: UnsignedIntegerType>(value: T) -> String {
     return String(value, radix: 16)
+}
+
+private func hex<T: SignedIntegerType>(value: T) -> String {
+    return String(value, radix: 16)
+}
+
+private extension String {
+    func zeroPrefix(length: Int) -> String {
+        let delta = length - characters.count
+        if delta <= 0 {
+            return self 
+        } else {
+            return (0..<delta).reduce("") { (str, _) in str + "0" } + self
+        }
+    }
+}
+
+extension SequenceType where Generator.Element: OpcodeType {
+    public func printDisassembly() {
+        var address: Int32 = 0
+        print("ADDR  OP    DESCRIPTION")
+        print("----  ----  -----------")
+        for opcode in self {
+            let opaddr = hex(address).zeroPrefix(4)
+            let rawOpcode = hex(opcode.rawOpcode).zeroPrefix(4)
+            print("\(opaddr)  \(rawOpcode)  \(opcode.textualDescription)")
+            address += 2
+        }
+    }
 }
