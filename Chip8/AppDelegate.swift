@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        let opcode = Opcode(rawOpcode: UInt16(bigEndian: 0x1234))
+        print(opcode?.textualDescription)
         // Insert code here to initialize your application
     }
 
