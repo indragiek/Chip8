@@ -36,10 +36,12 @@ public final class Emulator {
         static let NumberOfRegisters = 16
         static let StackSize = 16
         static let ProgramAddress: UInt16 = 0x200
-        static let ScreenRows: UInt8 = 32
-        static let ScreenColumns: UInt8 = 64
-        static let ScreenSize = Int(ScreenRows * ScreenColumns)
         static let NumberOfKeys = 16
+        
+        public static let ScreenRows = 32
+        public static let ScreenColumns = 64
+        public static let ScreenSize = ScreenRows * ScreenColumns
+        public static let RefreshRate = 60.0
     }
     
     public struct State {
@@ -82,6 +84,7 @@ public final class Emulator {
                 break
             case .ClearScreen:
                 screen = [UInt8](count: Hardware.ScreenSize, repeatedValue: 0)
+                redraw = true
             case .Return:
                 sp -= 1
                 pc = stack[sp]
@@ -190,19 +193,19 @@ public final class Emulator {
     }
     
     private func draw(xRegister xRegister: Opcode.Register, yRegister: Opcode.Register, rows: Opcode.Constant) {
-        let startX = V[xRegister]
-        let startY = V[yRegister]
-        for var y in startY..<(startY + rows) {
+        let startX = Int(V[xRegister])
+        let startY = Int(V[yRegister])
+        for var y in startY..<(startY + Int(rows)) {
             if y >= Hardware.ScreenRows {
                 y -= Hardware.ScreenRows
             }
-            var pixelRow = memory[Int(I) + Int(y)]
+            var pixelRow = memory[Int(I) + y]
             for var x in startX..<(startX + 8) {
                 if x >= Hardware.ScreenColumns {
                     x -= Hardware.ScreenColumns
                 }
                 if (pixelRow & 0x80) != 0 {
-                    let screenIndex = Int((y * Hardware.ScreenColumns) + x)
+                    let screenIndex = (y * Hardware.ScreenColumns) + x
                     if screen[screenIndex] == 1 {
                         V[0xF] = 1
                     }

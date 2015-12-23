@@ -13,22 +13,12 @@ import Chip8Kit
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var chip8View: Chip8View!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        do {
-            if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG") {
-                let disassembler = Disassembler(bytes: data.byteArray)
-                try disassembler.disassemble().printDisassembly()
-            }
-        } catch let error {
-            print(error)
+        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/INVADERS") {
+            chip8View.loadROM(data)
         }
     }
-
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
-    }
-
-
 }
 

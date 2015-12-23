@@ -20,6 +20,7 @@
 		72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE81C2A687500B36D16 /* DisplayTimer.swift */; };
 		72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */; };
 		72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */; };
+		72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		72C78BE81C2A687500B36D16 /* DisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTimer.swift; sourceTree = "<group>"; };
 		72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDisplayLinkTimer.swift; sourceTree = "<group>"; };
 		72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDDisplayTimer.swift; sourceTree = "<group>"; };
+		72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				72C78BE81C2A687500B36D16 /* DisplayTimer.swift */,
 				72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */,
 				72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */,
+				72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			files = (
 				72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */,
 				72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */,
+				72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */,
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
 				72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */,
 				72C78BCD1C2A5B7D00B36D16 /* Chip8View.swift in Sources */,
