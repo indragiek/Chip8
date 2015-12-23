@@ -15,9 +15,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let opcode = Opcode(rawOpcode: UInt16(bigEndian: 0x1234))
-        print(opcode?.textualDescription)
-        // Insert code here to initialize your application
+        do {
+            if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG"), disassembler = Disassembler(data: data) {
+                try disassembler.disassemble().printDisassembly()
+            }
+        } catch let error {
+            print(error)
+        }
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

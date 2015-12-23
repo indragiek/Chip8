@@ -13,8 +13,8 @@ public final class Disassembler {
     
     public func disassemble() throws -> [Opcode] {
         var opcodes = [Opcode]()
-        for i in 0..<(bytes.count - 1) {
-            let rawOpcode = UInt16(bigEndian: UInt16(bytes[i]) << 8) | UInt16(bytes[i + 1])
+        for i in 0.stride(to: bytes.count - 1, by: 2) {
+            let rawOpcode = (UInt16(bytes[i]) << 8) | UInt16(bytes[i + 1])
             if let opcode = Opcode(rawOpcode: rawOpcode) {
                 opcodes.append(opcode)
             } else {
