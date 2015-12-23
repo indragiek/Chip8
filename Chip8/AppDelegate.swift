@@ -7,16 +7,17 @@
 //
 
 import Cocoa
+import Chip8Kit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         do {
-            if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG"), disassembler = Disassembler(data: data) {
+            if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG") {
+                let disassembler = Disassembler(bytes: data.byteArray)
                 try disassembler.disassemble().printDisassembly()
             }
         } catch let error {

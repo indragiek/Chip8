@@ -8,7 +8,7 @@ public protocol OpcodeType {
 // From https://en.wikipedia.org/wiki/CHIP-8
 public enum Opcode: OpcodeType, CustomStringConvertible {
     public typealias Address = UInt16
-    public typealias Register = UInt8
+    public typealias Register = Int
     public typealias Constant = UInt8
     
     case CallMachineLanguageSubroutine(address: Address)    // 0NNN
@@ -219,65 +219,65 @@ public enum Opcode: OpcodeType, CustomStringConvertible {
         case (0x2, _, _, _):
             self = .CallSubroutine(address: rawOpcode & 0xFFF)
         case (0x3, let x, _, _):
-            self = .SkipIfEqualValue(x: x, value: UInt8(rawOpcode & 0xFF))
+            self = .SkipIfEqualValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
         case (0x4, let x, _, _):
-            self = .SkipIfNotEqualValue(x: x, value: UInt8(rawOpcode & 0xFF))
+            self = .SkipIfNotEqualValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
         case (0x5, let x, let y, 0x0):
-            self = .SkipIfEqualRegister(x: x, y: y)
+            self = .SkipIfEqualRegister(x: Int(x), y: Int(y))
         case (0x6, let x, _, _):
-            self = .SetValue(x: x, value: UInt8(rawOpcode & 0xFF))
+            self = .SetValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
         case (0x7, let x, _, _):
-            self = .AddValue(x: x, value: UInt8(rawOpcode & 0xFF))
+            self = .AddValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
         case (0x8, let x, let y, 0x0):
-            self = .SetRegister(x: x, y: y)
+            self = .SetRegister(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x1):
-            self = .Or(x: x, y: y)
+            self = .Or(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x2):
-            self = .And(x: x, y: y)
+            self = .And(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x3):
-            self = .Xor(x: x, y: y)
+            self = .Xor(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x4):
-            self = .AddRegister(x: x, y: y)
+            self = .AddRegister(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x5):
-            self = .SubtractYFromX(x: x, y: y)
+            self = .SubtractYFromX(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x6):
-            self = .ShiftRight(x: x, y: y)
+            self = .ShiftRight(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0x7):
-            self = .SubtractXFromY(x: x, y: y)
+            self = .SubtractXFromY(x: Int(x), y: Int(y))
         case (0x8, let x, let y, 0xE):
-            self = .ShiftLeft(x: x, y: y)
+            self = .ShiftLeft(x: Int(x), y: Int(y))
         case (0x9, let x, let y, 0x0):
-            self = .SkipIfNotEqualRegister(x: x, y: y)
+            self = .SkipIfNotEqualRegister(x: Int(x), y: Int(y))
         case (0xA, _, _, _):
             self = .SetIndex(address: rawOpcode & 0xFFF)
         case (0xB, _, _, _):
             self = .JumpRelative(address: rawOpcode & 0xFFF)
         case (0xC, let x, _, _):
-            self = .AndRandom(x: x, value: UInt8(rawOpcode & 0xFF))
+            self = .AndRandom(x: Int(x), value: UInt8(rawOpcode & 0xFF))
         case (0xD, let x, let y, let rows):
-            self = .Draw(x: x, y: y, rows: rows)
+            self = .Draw(x: Int(x), y: Int(y), rows: rows)
         case (0xE, let x, 0x9, 0xE):
-            self = .SkipIfKeyPressed(x: x)
+            self = .SkipIfKeyPressed(x: Int(x))
         case (0xE, let x, 0xA, 0x1):
-            self = .SkipIfKeyNotPressed(x: x)
+            self = .SkipIfKeyNotPressed(x: Int(x))
         case (0xF, let x, 0x0, 0x7):
-            self = .StoreDelayTimer(x: x)
+            self = .StoreDelayTimer(x: Int(x))
         case (0xF, let x, 0x0, 0xA):
-            self = .AwaitKeyPress(x: x)
+            self = .AwaitKeyPress(x: Int(x))
         case (0xF, let x, 0x1, 0x5):
-            self = .SetDelayTimer(x: x)
+            self = .SetDelayTimer(x: Int(x))
         case (0xF, let x, 0x1, 0x8):
-            self = .SetSoundTimer(x: x)
+            self = .SetSoundTimer(x: Int(x))
         case (0xF, let x, 0x1, 0xE):
-            self = .AddIndex(x: x)
+            self = .AddIndex(x: Int(x))
         case (0xF, let x, 0x2, 0x9):
-            self = .SetIndexFontCharacter(x: x)
+            self = .SetIndexFontCharacter(x: Int(x))
         case (0xF, let x, 0x3, 0x3):
-            self = .StoreBCD(x: x)
+            self = .StoreBCD(x: Int(x))
         case (0xF, let x, 0x5, 0x5):
-            self = .WriteMemory(x: x)
+            self = .WriteMemory(x: Int(x))
         case (0xF, let x, 0x6, 0x5):
-            self = .ReadMemory(x: x)
+            self = .ReadMemory(x: Int(x))
         default:
             return nil
         }
@@ -305,14 +305,12 @@ private extension String {
 
 extension SequenceType where Generator.Element: OpcodeType {
     public func printDisassembly() {
-        var address: Int32 = 0
         print("ADDR  OP    DESCRIPTION")
         print("----  ----  -----------")
-        for opcode in self {
-            let opaddr = hex(address).zeroPrefix(4)
+        for (index, opcode) in self.enumerate() {
+            let opaddr = hex(index * 2).zeroPrefix(4)
             let rawOpcode = hex(opcode.rawOpcode).zeroPrefix(4)
             print("\(opaddr)  \(rawOpcode)  \(opcode.textualDescription)")
-            address += 2
         }
     }
 }

@@ -10,10 +10,41 @@
 		72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BB11C29D9E100B36D16 /* AppDelegate.swift */; };
 		72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB31C29D9E100B36D16 /* Assets.xcassets */; };
 		72C78BB71C29D9E100B36D16 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB51C29D9E100B36D16 /* MainMenu.xib */; };
-		72C78BBF1C29D9E800B36D16 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BBE1C29D9E800B36D16 /* Opcode.swift */; };
-		72C78BC11C2A060600B36D16 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BC01C2A060600B36D16 /* Disassembler.swift */; };
-		72C78BC51C2A0CB800B36D16 /* DisassemblerFoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BC41C2A0CB800B36D16 /* DisassemblerFoundationExtensions.swift */; };
+		72C78BCD1C2A5B7D00B36D16 /* Chip8View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */; };
+		72C78BD61C2A5B9C00B36D16 /* Chip8Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = 72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72C78BDA1C2A5B9C00B36D16 /* Chip8Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */; };
+		72C78BDB1C2A5B9C00B36D16 /* Chip8Kit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		72C78BE31C2A5BB900B36D16 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE01C2A5BB900B36D16 /* Disassembler.swift */; };
+		72C78BE41C2A5BB900B36D16 /* Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE11C2A5BB900B36D16 /* Emulator.swift */; };
+		72C78BE51C2A5BB900B36D16 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE21C2A5BB900B36D16 /* Opcode.swift */; };
+		72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE81C2A687500B36D16 /* DisplayTimer.swift */; };
+		72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */; };
+		72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72C78BD81C2A5B9C00B36D16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72C78BA61C29D9E100B36D16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72C78BD21C2A5B9C00B36D16;
+			remoteInfo = Chip8Kit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		72C78BDF1C2A5B9C00B36D16 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				72C78BDB1C2A5B9C00B36D16 /* Chip8Kit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		72C78BAE1C29D9E100B36D16 /* Chip8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chip8.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,13 +52,28 @@
 		72C78BB31C29D9E100B36D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72C78BB61C29D9E100B36D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		72C78BB81C29D9E100B36D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72C78BBE1C29D9E800B36D16 /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
-		72C78BC01C2A060600B36D16 /* Disassembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disassembler.swift; sourceTree = "<group>"; };
-		72C78BC41C2A0CB800B36D16 /* DisassemblerFoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisassemblerFoundationExtensions.swift; sourceTree = "<group>"; };
+		72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8View.swift; sourceTree = "<group>"; };
+		72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Chip8Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Chip8Kit.h; sourceTree = "<group>"; };
+		72C78BD71C2A5B9C00B36D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72C78BE01C2A5BB900B36D16 /* Disassembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disassembler.swift; sourceTree = "<group>"; };
+		72C78BE11C2A5BB900B36D16 /* Emulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emulator.swift; sourceTree = "<group>"; };
+		72C78BE21C2A5BB900B36D16 /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
+		72C78BE81C2A687500B36D16 /* DisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTimer.swift; sourceTree = "<group>"; };
+		72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDisplayLinkTimer.swift; sourceTree = "<group>"; };
+		72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDDisplayTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		72C78BAB1C29D9E100B36D16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72C78BDA1C2A5B9C00B36D16 /* Chip8Kit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72C78BCF1C2A5B9C00B36D16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				72C78BB01C29D9E100B36D16 /* Chip8 */,
+				72C78BD41C2A5B9C00B36D16 /* Chip8Kit */,
 				72C78BAF1C29D9E100B36D16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				72C78BAE1C29D9E100B36D16 /* Chip8.app */,
+				72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,14 +108,38 @@
 				72C78BB31C29D9E100B36D16 /* Assets.xcassets */,
 				72C78BB51C29D9E100B36D16 /* MainMenu.xib */,
 				72C78BB81C29D9E100B36D16 /* Info.plist */,
-				72C78BBE1C29D9E800B36D16 /* Opcode.swift */,
-				72C78BC01C2A060600B36D16 /* Disassembler.swift */,
-				72C78BC41C2A0CB800B36D16 /* DisassemblerFoundationExtensions.swift */,
+				72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */,
+				72C78BE81C2A687500B36D16 /* DisplayTimer.swift */,
+				72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */,
+				72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
 		};
+		72C78BD41C2A5B9C00B36D16 /* Chip8Kit */ = {
+			isa = PBXGroup;
+			children = (
+				72C78BE01C2A5BB900B36D16 /* Disassembler.swift */,
+				72C78BE11C2A5BB900B36D16 /* Emulator.swift */,
+				72C78BE21C2A5BB900B36D16 /* Opcode.swift */,
+				72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */,
+				72C78BD71C2A5B9C00B36D16 /* Info.plist */,
+			);
+			path = Chip8Kit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		72C78BD01C2A5B9C00B36D16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72C78BD61C2A5B9C00B36D16 /* Chip8Kit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		72C78BAD1C29D9E100B36D16 /* Chip8 */ = {
@@ -77,15 +149,35 @@
 				72C78BAA1C29D9E100B36D16 /* Sources */,
 				72C78BAB1C29D9E100B36D16 /* Frameworks */,
 				72C78BAC1C29D9E100B36D16 /* Resources */,
+				72C78BDF1C2A5B9C00B36D16 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				72C78BD91C2A5B9C00B36D16 /* PBXTargetDependency */,
 			);
 			name = Chip8;
 			productName = Chip8;
 			productReference = 72C78BAE1C29D9E100B36D16 /* Chip8.app */;
 			productType = "com.apple.product-type.application";
+		};
+		72C78BD21C2A5B9C00B36D16 /* Chip8Kit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72C78BDC1C2A5B9C00B36D16 /* Build configuration list for PBXNativeTarget "Chip8Kit" */;
+			buildPhases = (
+				72C78BCE1C2A5B9C00B36D16 /* Sources */,
+				72C78BCF1C2A5B9C00B36D16 /* Frameworks */,
+				72C78BD01C2A5B9C00B36D16 /* Headers */,
+				72C78BD11C2A5B9C00B36D16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chip8Kit;
+			productName = Chip8Kit;
+			productReference = 72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -98,6 +190,9 @@
 				ORGANIZATIONNAME = "Indragie Karunaratne";
 				TargetAttributes = {
 					72C78BAD1C29D9E100B36D16 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					72C78BD21C2A5B9C00B36D16 = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -116,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				72C78BAD1C29D9E100B36D16 /* Chip8 */,
+				72C78BD21C2A5B9C00B36D16 /* Chip8Kit */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +226,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		72C78BD11C2A5B9C00B36D16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -137,14 +240,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */,
+				72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */,
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
-				72C78BBF1C29D9E800B36D16 /* Opcode.swift in Sources */,
-				72C78BC51C2A0CB800B36D16 /* DisassemblerFoundationExtensions.swift in Sources */,
-				72C78BC11C2A060600B36D16 /* Disassembler.swift in Sources */,
+				72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */,
+				72C78BCD1C2A5B7D00B36D16 /* Chip8View.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72C78BCE1C2A5B9C00B36D16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72C78BE51C2A5BB900B36D16 /* Opcode.swift in Sources */,
+				72C78BE41C2A5BB900B36D16 /* Emulator.swift in Sources */,
+				72C78BE31C2A5BB900B36D16 /* Disassembler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72C78BD91C2A5B9C00B36D16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 72C78BD21C2A5B9C00B36D16 /* Chip8Kit */;
+			targetProxy = 72C78BD81C2A5B9C00B36D16 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		72C78BB51C29D9E100B36D16 /* MainMenu.xib */ = {
@@ -243,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Chip8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Chip8;
@@ -255,10 +378,56 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Chip8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Chip8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		72C78BDD1C2A5B9C00B36D16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Chip8Kit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Chip8Kit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		72C78BDE1C2A5B9C00B36D16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Chip8Kit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.indragie.Chip8Kit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -279,6 +448,14 @@
 			buildConfigurations = (
 				72C78BBC1C29D9E100B36D16 /* Debug */,
 				72C78BBD1C29D9E100B36D16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		72C78BDC1C2A5B9C00B36D16 /* Build configuration list for PBXNativeTarget "Chip8Kit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72C78BDD1C2A5B9C00B36D16 /* Debug */,
+				72C78BDE1C2A5B9C00B36D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

@@ -1,0 +1,224 @@
+//  Copyright © 2015 Indragie Karunaratne. All rights reserved.
+
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin
+#endif
+
+// From http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/
+private let FontSet: [UInt8] = [
+    0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
+    0x20, 0x60, 0x20, 0x20, 0x70, // 1
+    0xF0, 0x10, 0xF0, 0x80, 0xF0, // 2
+    0xF0, 0x10, 0xF0, 0x10, 0xF0, // 3
+    0x90, 0x90, 0xF0, 0x10, 0x10, // 4
+    0xF0, 0x80, 0xF0, 0x10, 0xF0, // 5
+    0xF0, 0x80, 0xF0, 0x90, 0xF0, // 6
+    0xF0, 0x10, 0x20, 0x40, 0x40, // 7
+    0xF0, 0x90, 0xF0, 0x90, 0xF0, // 8
+    0xF0, 0x90, 0xF0, 0x10, 0xF0, // 9
+    0xF0, 0x90, 0xF0, 0x90, 0x90, // A
+    0xE0, 0x90, 0xE0, 0x90, 0xE0, // B
+    0xF0, 0x80, 0x80, 0x80, 0xF0, // C
+    0xE0, 0x90, 0x90, 0x90, 0xE0, // D
+    0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
+    0xF0, 0x80, 0xF0, 0x80, 0x80  // F
+]
+
+public final class Emulator {
+    public enum Error: ErrorType {
+        case UnrecognizedOpcode(UInt16)
+    }
+    
+    public struct Hardware {
+        static let MemorySize = 4096
+        static let NumberOfRegisters = 16
+        static let StackSize = 16
+        static let ProgramAddress: UInt16 = 0x200
+        static let ScreenRows: UInt8 = 32
+        static let ScreenColumns: UInt8 = 64
+        static let ScreenSize = Int(ScreenRows * ScreenColumns)
+        static let NumberOfKeys = 16
+    }
+    
+    public struct State {
+        public let screen: [UInt8]
+        public let redraw: Bool
+        public let beep: Bool
+    }
+    
+    private var memory: [UInt8] = {
+        var memory = [UInt8](count: Hardware.MemorySize, repeatedValue: 0)
+        memory.replaceRange(0..<FontSet.count, with: FontSet)
+        return memory
+    }()
+    
+    private var stack = [UInt16](count: Hardware.StackSize, repeatedValue: 0)
+    private var V = [UInt8](count: Hardware.NumberOfRegisters, repeatedValue: 0)
+    private var screen = [UInt8](count: Hardware.ScreenSize, repeatedValue: 0)
+    private var I: UInt16 = 0                 // Index register
+    private var sp = 0                        // Stack pointer
+    private var pc = Hardware.ProgramAddress  // Program counter
+    private var delayTimer: UInt8 = 0
+    private var soundTimer: UInt8 = 0
+    private var key = UInt8.max
+    
+    public init(romData: [UInt8]) {
+        let intPC = Int(pc)
+        memory.replaceRange(intPC..<(intPC + romData.count), with: romData)
+    }
+    
+    public func emulateCycle() throws -> State {
+        let intPC = Int(pc)
+        let rawOpcode = (UInt16(memory[intPC]) << 8) | UInt16(memory[intPC + 1])
+        if let opcode = Opcode(rawOpcode: rawOpcode) {
+            var incrementPC = true
+            var redraw = false
+            
+            switch opcode {
+            case .CallMachineLanguageSubroutine(address: _):
+                // Not implemented
+                break
+            case .ClearScreen:
+                screen = [UInt8](count: Hardware.ScreenSize, repeatedValue: 0)
+            case .Return:
+                sp -= 1
+                pc = stack[sp]
+            case .JumpAbsolute(address: let address):
+                pc = address
+                incrementPC = false
+            case .CallSubroutine(address: let address):
+                stack[sp] = pc
+                sp += 1
+                pc = address
+                incrementPC = false
+            case .SkipIfEqualValue(x: let x, value: let value):
+                if V[x] == value { pc += 2 }
+            case .SkipIfNotEqualValue(x: let x, value: let value):
+                if V[x] != value { pc += 2 }
+            case .SkipIfEqualRegister(x: let x, y: let y):
+                if V[x] == V[y] { pc += 2 }
+            case .SetValue(x: let x, value: let value):
+                V[x] = value
+            case .AddValue(x: let x, value: let value):
+                V[x] += value
+            case .SetRegister(x: let x, y: let y):
+                V[x] = V[y]
+            case .Or(x: let x, y: let y):
+                V[x] |= V[y]
+            case .And(x: let x, y: let y):
+                V[x] &= V[y]
+            case .Xor(x: let x, y: let y):
+                V[x] ^= V[y]
+            case .AddRegister(x: let x, y: let y):
+                V[0xF] = (Int(V[x]) + Int(V[y]) > Int(UInt8.max)) ? 1 : 0
+                V[x] = V[x] &+ V[y]
+            case .SubtractYFromX(x: let x, y: let y):
+                V[0xF] = (V[x] < V[y]) ? 0 : 1
+                V[x] = V[x] &- V[y]
+            case .ShiftRight(x: let x, y: _):
+                V[0xf] = V[x] & 1
+                V[x] >>= 1
+            case .SubtractXFromY(x: let x, y: let y):
+                V[0xF] = (V[y] < V[x]) ? 0 : 1
+                V[x] = V[y] &- V[x]
+            case .ShiftLeft(x: let x, y: _):
+                V[0xF] = (V[x] & 0x80) >> 7
+                V[x] <<= 1
+            case .SkipIfNotEqualRegister(x: let x, y: let y):
+                if V[x] != V[y] { pc += 2 }
+            case .SetIndex(address: let address):
+                I = address
+            case .JumpRelative(address: let address):
+                pc = address + UInt16(V[0])
+                incrementPC = false
+            case .AndRandom(x: let x, value: let value):
+                V[x] = UInt8(rand() % UINT8_MAX) & value
+            case .Draw(x: let x, y: let y, rows: let rows):
+                draw(xRegister: x, yRegister: y, rows: rows)
+                redraw = true
+            case .SkipIfKeyPressed(x: let x):
+                if key == V[x] { pc += 2 }
+            case .SkipIfKeyNotPressed(x: let x):
+                if key != V[x] { pc += 2 }
+            case .StoreDelayTimer(x: let x):
+                V[x] = delayTimer
+            case .AwaitKeyPress(x: let x):
+                if key == 0 {
+                    return State(screen: screen, redraw: false, beep: false)
+                } else {
+                    V[x] = key
+                }
+            case .SetDelayTimer(x: let x):
+                delayTimer = V[x]
+            case .SetSoundTimer(x: let x):
+                soundTimer = V[x]
+            case .AddIndex(x: let x):
+                I += UInt16(V[x])
+            case .SetIndexFontCharacter(x: let x):
+                I = UInt16(V[x] * 5)
+            case .StoreBCD(x: let x):
+                storeBCD(x)
+            case .WriteMemory(x: let x):
+                for xi in 0...Int(x) {
+                    memory[Int(I) + xi] = V[xi]
+                }
+            case .ReadMemory(x: let x):
+                for xi in 0...Int(x) {
+                    V[xi] = memory[Int(I) + xi]
+                }
+            }
+            
+            if incrementPC {
+                pc += 2
+            }
+            if delayTimer > 0 {
+                delayTimer -= 1
+            }
+            
+            var beep = false
+            if soundTimer > 0 {
+                beep = soundTimer == 1
+                soundTimer -= 1
+            }
+            
+            return State(screen: screen, redraw: redraw, beep: beep)
+        } else {
+            throw Error.UnrecognizedOpcode(rawOpcode)
+        }
+    }
+    
+    private func draw(xRegister xRegister: Opcode.Register, yRegister: Opcode.Register, rows: Opcode.Constant) {
+        let startX = V[xRegister]
+        let startY = V[yRegister]
+        for var y in startY..<(startY + rows) {
+            if y >= Hardware.ScreenRows {
+                y -= Hardware.ScreenRows
+            }
+            var pixelRow = memory[Int(I) + Int(y)]
+            for var x in startX..<(startX + 8) {
+                if x >= Hardware.ScreenColumns {
+                    x -= Hardware.ScreenColumns
+                }
+                if (pixelRow & 0x80) != 0 {
+                    let screenIndex = Int((y * Hardware.ScreenColumns) + x)
+                    if screen[screenIndex] == 1 {
+                        V[0xF] = 1
+                    }
+                    screen[screenIndex] ^= 1
+                }
+                pixelRow <<= 1
+            }
+        }
+    }
+    
+    private func storeBCD(xRegister: Opcode.Register) {
+        let x = V[xRegister]
+        let address = Int(I)
+        // From http://www.multigesture.net/wp-content/uploads/mirror/goldroad/chip8.shtml
+        memory[address] = x / 100
+        memory[address + 1] = (x / 10) % 10
+        memory[address + 2] = (x % 100) % 10
+    }
+}
