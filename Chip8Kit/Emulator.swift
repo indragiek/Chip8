@@ -201,16 +201,8 @@ public final class Emulator {
             var pixelRow = memory[Int(I) + y]
             for x in 0..<8 {
                 if (pixelRow & 0x80) != 0 {
-                    var screenY = startY + y
-                    if screenY >= Hardware.ScreenRows {
-                        screenY = screenY % Hardware.ScreenRows
-                    }
-                    
-                    var screenX = startX + x
-                    if screenX >= Hardware.ScreenColumns {
-                        screenX = screenX % Hardware.ScreenColumns
-                    }
-                    
+                    let screenY = (startY + y) % Hardware.ScreenRows
+                    let screenX = (startX + x) % Hardware.ScreenColumns
                     let screenIndex = (screenY * Hardware.ScreenColumns) + screenX
                     if screen[screenIndex] == 1 {
                         V[0xF] = 1
