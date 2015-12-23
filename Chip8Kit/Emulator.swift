@@ -158,7 +158,9 @@ public final class Emulator {
             case .SetSoundTimer(x: let x):
                 soundTimer = V[x]
             case .AddIndex(x: let x):
-                I += UInt16(V[x])
+                let value = UInt16(V[x])
+                V[0xF] = ((value + I) > UInt16(0xFFF)) ? 1 : 0
+                I += value
             case .SetIndexFontCharacter(x: let x):
                 I = UInt16(V[x] * 5)
             case .StoreBCD(x: let x):
