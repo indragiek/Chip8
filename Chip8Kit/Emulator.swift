@@ -202,13 +202,13 @@ public final class Emulator {
             for x in 0..<8 {
                 if (pixelRow & 0x80) != 0 {
                     var screenY = startY + y
-                    if screenY > Hardware.ScreenRows {
-                        screenY -= Hardware.ScreenRows
+                    if screenY >= Hardware.ScreenRows {
+                        screenY = screenY % Hardware.ScreenRows
                     }
                     
                     var screenX = startX + x
-                    if screenX > Hardware.ScreenColumns {
-                        screenX -= Hardware.ScreenColumns
+                    if screenX >= Hardware.ScreenColumns {
+                        screenX = screenX % Hardware.ScreenColumns
                     }
                     
                     let screenIndex = (screenY * Hardware.ScreenColumns) + screenX
