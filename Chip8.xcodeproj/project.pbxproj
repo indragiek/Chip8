@@ -7,19 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */; };
 		72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BB11C29D9E100B36D16 /* AppDelegate.swift */; };
 		72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB31C29D9E100B36D16 /* Assets.xcassets */; };
 		72C78BB71C29D9E100B36D16 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB51C29D9E100B36D16 /* MainMenu.xib */; };
-		72C78BCD1C2A5B7D00B36D16 /* Chip8View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */; };
 		72C78BD61C2A5B9C00B36D16 /* Chip8Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = 72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		72C78BDA1C2A5B9C00B36D16 /* Chip8Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */; };
 		72C78BDB1C2A5B9C00B36D16 /* Chip8Kit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		72C78BE31C2A5BB900B36D16 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE01C2A5BB900B36D16 /* Disassembler.swift */; };
 		72C78BE41C2A5BB900B36D16 /* Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE11C2A5BB900B36D16 /* Emulator.swift */; };
 		72C78BE51C2A5BB900B36D16 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE21C2A5BB900B36D16 /* Opcode.swift */; };
-		72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE81C2A687500B36D16 /* DisplayTimer.swift */; };
-		72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */; };
-		72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */; };
 		72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,21 +45,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8Scene.swift; sourceTree = "<group>"; };
 		72C78BAE1C29D9E100B36D16 /* Chip8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chip8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C78BB11C29D9E100B36D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72C78BB31C29D9E100B36D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72C78BB61C29D9E100B36D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		72C78BB81C29D9E100B36D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8View.swift; sourceTree = "<group>"; };
 		72C78BD31C2A5B9C00B36D16 /* Chip8Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Chip8Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Chip8Kit.h; sourceTree = "<group>"; };
 		72C78BD71C2A5B9C00B36D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72C78BE01C2A5BB900B36D16 /* Disassembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disassembler.swift; sourceTree = "<group>"; };
 		72C78BE11C2A5BB900B36D16 /* Emulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emulator.swift; sourceTree = "<group>"; };
 		72C78BE21C2A5BB900B36D16 /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
-		72C78BE81C2A687500B36D16 /* DisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTimer.swift; sourceTree = "<group>"; };
-		72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVDisplayLinkTimer.swift; sourceTree = "<group>"; };
-		72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDDisplayTimer.swift; sourceTree = "<group>"; };
 		72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,11 +104,8 @@
 				72C78BB31C29D9E100B36D16 /* Assets.xcassets */,
 				72C78BB51C29D9E100B36D16 /* MainMenu.xib */,
 				72C78BB81C29D9E100B36D16 /* Info.plist */,
-				72C78BCC1C2A5B7D00B36D16 /* Chip8View.swift */,
-				72C78BE81C2A687500B36D16 /* DisplayTimer.swift */,
-				72C78BEA1C2A68C600B36D16 /* CVDisplayLinkTimer.swift */,
-				72C78BEC1C2A68F700B36D16 /* GCDDisplayTimer.swift */,
 				72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */,
+				7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
@@ -243,12 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72C78BE91C2A687500B36D16 /* DisplayTimer.swift in Sources */,
-				72C78BEB1C2A68C600B36D16 /* CVDisplayLinkTimer.swift in Sources */,
 				72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */,
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
-				72C78BED1C2A68F700B36D16 /* GCDDisplayTimer.swift in Sources */,
-				72C78BCD1C2A5B7D00B36D16 /* Chip8View.swift in Sources */,
+				7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +442,7 @@
 				72C78BBD1C29D9E100B36D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		72C78BDC1C2A5B9C00B36D16 /* Build configuration list for PBXNativeTarget "Chip8Kit" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +451,7 @@
 				72C78BDE1C2A5B9C00B36D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,16 +8,20 @@
 
 import Cocoa
 import Chip8Kit
+import SpriteKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var chip8View: Chip8View!
+    @IBOutlet weak var chip8View: SKView!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/INVADERS") {
-            chip8View.loadROM(data)
+        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG") {
+            let emulator = Emulator(romData: data.byteArray)
+            let scene = Chip8Scene(size: chip8View.bounds.size, emulator: emulator)
+            chip8View.showsFPS = true
+            chip8View.presentScene(scene)
         }
     }
 }
