@@ -105,7 +105,7 @@ public final class Emulator {
             case .SetValue(x: let x, value: let value):
                 V[x] = value
             case .AddValue(x: let x, value: let value):
-                V[x] += value
+                V[x] = V[x] &+ value
             case .SetRegister(x: let x, y: let y):
                 V[x] = V[y]
             case .Or(x: let x, y: let y):
@@ -195,17 +195,23 @@ public final class Emulator {
     private func draw(xRegister xRegister: Opcode.Register, yRegister: Opcode.Register, rows: Opcode.Constant) {
         let startX = Int(V[xRegister])
         let startY = Int(V[yRegister])
-        for var y in startY..<(startY + Int(rows)) {
-            if y >= Hardware.ScreenRows {
-                y -= Hardware.ScreenRows
-            }
+        
+        V[0xF] = 0
+        for y in 0..<Int(rows) {
             var pixelRow = memory[Int(I) + y]
-            for var x in startX..<(startX + 8) {
-                if x >= Hardware.ScreenColumns {
-                    x -= Hardware.ScreenColumns
-                }
+            for x in 0..<8 {
                 if (pixelRow & 0x80) != 0 {
-                    let screenIndex = (y * Hardware.ScreenColumns) + x
+                    var screenY = startY + y
+                    if screenY > Hardware.ScreenRows {
+                        screenY -= Hardware.ScreenRows
+                    }
+                    
+                    var screenX = startX + x
+                    if screenX > Hardware.ScreenColumns {
+                        screenX -= Hardware.ScreenColumns
+                    }
+                    
+                    let screenIndex = (screenY * Hardware.ScreenColumns) + screenX
                     if screen[screenIndex] == 1 {
                         V[0xF] = 1
                     }
