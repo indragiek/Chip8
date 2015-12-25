@@ -1,8 +1,6 @@
 //  Copyright © 2015 Indragie Karunaratne. All rights reserved.
 
 import Cocoa
-import Chip8Kit
-import SpriteKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

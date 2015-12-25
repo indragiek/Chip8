@@ -1,10 +1,12 @@
 //  Copyright © 2015 Indragie Karunaratne. All rights reserved.
 
+/// Disassembles a CHIP-8 ROM.
 public struct Disassembler {
     public enum Error: ErrorType {
         case UnrecognizedOpcode(UInt16)
     }
     
+    /// Disassembles `rom` and returns a list of opcodes.
     public static func disassemble(rom: ROM) throws -> [Opcode] {
         var opcodes = [Opcode]()
         for i in 0.stride(to: rom.bytes.count - 1, by: 2) {
@@ -18,6 +20,7 @@ public struct Disassembler {
         return opcodes
     }
     
+    /// Disassembles `rom` and pretty-prints the disassembly.
     public static func printDisassembly(rom: ROM) throws {
         let opcodes = try disassemble(rom)
         
