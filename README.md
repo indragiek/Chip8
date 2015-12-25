@@ -3,7 +3,7 @@
 
 This project contains an emulator and disassembler for the [CHIP-8 virtual machine](https://en.wikipedia.org/wiki/CHIP-8) written in Swift. Emulation is an area of interest that I hadn't explored much, so I worked on this relatively simple emulator to learn more about it.
 
-![Chip8 Emulator](screenshot.png)
+<img src="screenshot.png" alt="Chip8 Emulator" height="444" width="624" />
 
 ### Chip8Kit
 
