@@ -77,6 +77,12 @@ The key mapping can be customized by setting `Chip8View.keyMapping`.
 
 The CHIP-8 can only play a single sound, which is a beep. I couldn't find an appropriately licensed copy of the original sound, so `Chip8.app` defaults to using the system beep noise in its place. The beep sound can be customized by setting the `Chip8View.beepSound` property.
 
+### Resources
+
+* https://en.wikipedia.org/wiki/CHIP-8
+* http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/
+* http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+
 
 ### Contact
 
