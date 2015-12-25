@@ -80,7 +80,7 @@ The CHIP-8 can only play a single sound, which is a beep. I couldn't find an app
 
 ### ROMs
 
-A collection of public domain ROMs that can be used with this emulator can be found [here](http://www.zophar.net/pdroms/chip8.html).
+A collection of public domain ROMs that can be used with this emulator can be found [here](http://www.zophar.net/pdroms/chip8/chip-8-games-pack.html).
 
 ### Resources
 
