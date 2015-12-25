@@ -7,13 +7,14 @@ import Carbon
 final class Chip8Scene: SKScene {
     typealias KeyMapping = Int -> Emulator.Key?
     
-    private let emulator: Emulator
+    private let runner: Chip8Runner
     private let sprites: [SKSpriteNode]
     private let keyMapping: KeyMapping
+    private let beepSound: Sound
     
     // MARK: Initialization
     
-    init(size: CGSize, emulator: Emulator, keyMapping: KeyMapping = defaultKeyMapping) {
+    init(size: CGSize, runner: Chip8Runner, keyMapping: KeyMapping = defaultKeyMapping, beepSound: Sound = NSBeepSound()) {
         let rows = Emulator.Hardware.ScreenRows
         let columns = Emulator.Hardware.ScreenColumns
         let pixelDim = floor(size.width / CGFloat(columns))
@@ -29,15 +30,18 @@ final class Chip8Scene: SKScene {
                 sprites.append(node)
             }
         }
+        self.runner = runner
         self.sprites = sprites
-        self.emulator = emulator
         self.keyMapping = keyMapping
+        self.beepSound = beepSound
         
         super.init(size: size)
         
         for sprite in sprites {
             addChild(sprite)
         }
+        
+        self.runner.resume()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -47,26 +51,21 @@ final class Chip8Scene: SKScene {
     // MARK: Rendering
     
     override func update(currentTime: NSTimeInterval) {
-        do {
-            let state = try emulator.emulateCycle()
-            if state.redraw {
-                let rows = Emulator.Hardware.ScreenRows
-                let columns = Emulator.Hardware.ScreenColumns
-                
-                for y in 0..<rows {
-                    for x in 0..<columns {
-                        let index = (y * columns) + x
-                        let pixel = state.screen[index]
-                        let sprite = sprites[index]
-                        sprite.color = (pixel == 1) ? .whiteColor() : .blackColor()
-                    }
+        if let screen = runner.screen where runner.redraw {
+            let rows = Emulator.Hardware.ScreenRows
+            let columns = Emulator.Hardware.ScreenColumns
+            
+            for y in 0..<rows {
+                for x in 0..<columns {
+                    let index = (y * columns) + x
+                    let pixel = screen[index]
+                    let sprite = sprites[index]
+                    sprite.color = (pixel == 1) ? .whiteColor() : .blackColor()
                 }
             }
-            if state.beep {
-                NSBeep()
-            }
-        } catch let error {
-            fatalError("Emulation error: \(error)")
+        }
+        if runner.playBeep {
+            self.beepSound.playSound()
         }
     }
     
@@ -82,7 +81,7 @@ final class Chip8Scene: SKScene {
     
     private func handleKeyEvent(event: NSEvent, pressed: Bool) {
         if let key = keyMapping(Int(event.keyCode)) {
-            emulator.setState(pressed, forKey: key)
+            runner.setState(pressed, forKey: key)
         }
     }
 }
