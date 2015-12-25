@@ -61,6 +61,15 @@ final class Chip8View: NSView {
         self.scene = scene
     }
     
+    // MARK: NSView
+    
+    override var acceptsFirstResponder: Bool { return true }
+    
+    override func becomeFirstResponder() -> Bool {
+        window?.makeFirstResponder(sceneView)
+        return false
+    }
+    
     // MARK: Initialization
     
     private func commonInit() {

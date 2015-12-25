@@ -15,6 +15,8 @@
 		7265CBD61C2D009900090E6A /* ROM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD51C2D009900090E6A /* ROM.swift */; };
 		7265CBD81C2D05C100090E6A /* HexStringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD71C2D05C100090E6A /* HexStringUtilities.swift */; };
 		7265CBDA1C2D125F00090E6A /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD91C2D125F00090E6A /* KeyMapping.swift */; };
+		7265CBDD1C2D16B200090E6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBDB1C2D16B200090E6A /* ViewController.swift */; };
+		7265CBDE1C2D16B200090E6A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7265CBDC1C2D16B200090E6A /* ViewController.xib */; };
 		72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BB11C29D9E100B36D16 /* AppDelegate.swift */; };
 		72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB31C29D9E100B36D16 /* Assets.xcassets */; };
 		72C78BB71C29D9E100B36D16 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB51C29D9E100B36D16 /* MainMenu.xib */; };
@@ -59,6 +61,8 @@
 		7265CBD51C2D009900090E6A /* ROM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROM.swift; sourceTree = "<group>"; };
 		7265CBD71C2D05C100090E6A /* HexStringUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexStringUtilities.swift; sourceTree = "<group>"; };
 		7265CBD91C2D125F00090E6A /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
+		7265CBDB1C2D16B200090E6A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7265CBDC1C2D16B200090E6A /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		72C78BAE1C29D9E100B36D16 /* Chip8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chip8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C78BB11C29D9E100B36D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72C78BB31C29D9E100B36D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				72019D061C2CC63E009D6E3F /* GCDTimer.swift */,
 				72019D0E1C2CD637009D6E3F /* Sound.swift */,
 				7265CBD91C2D125F00090E6A /* KeyMapping.swift */,
+				7265CBDB1C2D16B200090E6A /* ViewController.swift */,
+				7265CBDC1C2D16B200090E6A /* ViewController.xib */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
@@ -234,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */,
+				7265CBDE1C2D16B200090E6A /* ViewController.xib in Resources */,
 				72C78BB71C29D9E100B36D16 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +265,7 @@
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
 				7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */,
 				72019D111C2CFED0009D6E3F /* Chip8View.swift in Sources */,
+				7265CBDD1C2D16B200090E6A /* ViewController.swift in Sources */,
 				72019D0F1C2CD637009D6E3F /* Sound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

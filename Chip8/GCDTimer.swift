@@ -36,7 +36,7 @@ final class GCDTimer {
     }
     
     deinit {
-        if suspended { resume() }
         dispatch_source_cancel(timer)
+        if suspended { resume() }
     }
 }
