@@ -65,9 +65,12 @@ final class Chip8View: NSView {
     
     override var acceptsFirstResponder: Bool { return true }
     
-    override func becomeFirstResponder() -> Bool {
-        window?.makeFirstResponder(sceneView)
-        return false
+    override func keyDown(theEvent: NSEvent) {
+        sceneView.keyDown(theEvent)
+    }
+    
+    override func keyUp(theEvent: NSEvent) {
+        sceneView.keyUp(theEvent)
     }
     
     // MARK: Initialization

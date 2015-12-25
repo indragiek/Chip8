@@ -11,7 +11,7 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         chip8View.showsFPS = true
     }
-    
+
     // MARK: Actions
     
     @IBAction func load(_: AnyObject) {
@@ -25,6 +25,7 @@ class ViewController: NSViewController {
             if let URL = panel.URL, path = URL.path {
                 do {
                     self.chip8View.loadROM(try ROM(path: path))
+                    self.chip8View.window?.makeFirstResponder(self.chip8View)
                 } catch let error {
                     print("Error loading ROM: \(error)")
                 }
