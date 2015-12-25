@@ -679,7 +679,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="512" height="256"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="HQL-EW-TBG" customClass="SKView">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="HQL-EW-TBG" customClass="Chip8View" customModule="Chip8" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="512" height="256"/>
                     </customView>
                 </subviews>

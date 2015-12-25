@@ -10,7 +10,11 @@
 		72019D071C2CC63E009D6E3F /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D061C2CC63E009D6E3F /* GCDTimer.swift */; };
 		72019D091C2CCBEF009D6E3F /* Chip8Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */; };
 		72019D0F1C2CD637009D6E3F /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D0E1C2CD637009D6E3F /* Sound.swift */; };
+		72019D111C2CFED0009D6E3F /* Chip8View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D101C2CFED0009D6E3F /* Chip8View.swift */; };
 		7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */; };
+		7265CBD61C2D009900090E6A /* ROM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD51C2D009900090E6A /* ROM.swift */; };
+		7265CBD81C2D05C100090E6A /* HexStringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD71C2D05C100090E6A /* HexStringUtilities.swift */; };
+		7265CBDA1C2D125F00090E6A /* KeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CBD91C2D125F00090E6A /* KeyMapping.swift */; };
 		72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BB11C29D9E100B36D16 /* AppDelegate.swift */; };
 		72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB31C29D9E100B36D16 /* Assets.xcassets */; };
 		72C78BB71C29D9E100B36D16 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB51C29D9E100B36D16 /* MainMenu.xib */; };
@@ -20,7 +24,6 @@
 		72C78BE31C2A5BB900B36D16 /* Disassembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE01C2A5BB900B36D16 /* Disassembler.swift */; };
 		72C78BE41C2A5BB900B36D16 /* Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE11C2A5BB900B36D16 /* Emulator.swift */; };
 		72C78BE51C2A5BB900B36D16 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BE21C2A5BB900B36D16 /* Opcode.swift */; };
-		72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +54,11 @@
 		72019D061C2CC63E009D6E3F /* GCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
 		72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8Runner.swift; sourceTree = "<group>"; };
 		72019D0E1C2CD637009D6E3F /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		72019D101C2CFED0009D6E3F /* Chip8View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8View.swift; sourceTree = "<group>"; };
 		7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8Scene.swift; sourceTree = "<group>"; };
+		7265CBD51C2D009900090E6A /* ROM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROM.swift; sourceTree = "<group>"; };
+		7265CBD71C2D05C100090E6A /* HexStringUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexStringUtilities.swift; sourceTree = "<group>"; };
+		7265CBD91C2D125F00090E6A /* KeyMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMapping.swift; sourceTree = "<group>"; };
 		72C78BAE1C29D9E100B36D16 /* Chip8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chip8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C78BB11C29D9E100B36D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72C78BB31C29D9E100B36D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,7 +70,6 @@
 		72C78BE01C2A5BB900B36D16 /* Disassembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disassembler.swift; sourceTree = "<group>"; };
 		72C78BE11C2A5BB900B36D16 /* Emulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emulator.swift; sourceTree = "<group>"; };
 		72C78BE21C2A5BB900B36D16 /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
-		72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,11 +116,12 @@
 				72C78BB31C29D9E100B36D16 /* Assets.xcassets */,
 				72C78BB51C29D9E100B36D16 /* MainMenu.xib */,
 				72C78BB81C29D9E100B36D16 /* Info.plist */,
-				72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */,
 				7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */,
 				72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */,
+				72019D101C2CFED0009D6E3F /* Chip8View.swift */,
 				72019D061C2CC63E009D6E3F /* GCDTimer.swift */,
 				72019D0E1C2CD637009D6E3F /* Sound.swift */,
+				7265CBD91C2D125F00090E6A /* KeyMapping.swift */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
@@ -125,6 +132,8 @@
 				72C78BE01C2A5BB900B36D16 /* Disassembler.swift */,
 				72C78BE11C2A5BB900B36D16 /* Emulator.swift */,
 				72C78BE21C2A5BB900B36D16 /* Opcode.swift */,
+				7265CBD51C2D009900090E6A /* ROM.swift */,
+				7265CBD71C2D05C100090E6A /* HexStringUtilities.swift */,
 				72C78BD51C2A5B9C00B36D16 /* Chip8Kit.h */,
 				72C78BD71C2A5B9C00B36D16 /* Info.plist */,
 			);
@@ -244,10 +253,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				72019D091C2CCBEF009D6E3F /* Chip8Runner.swift in Sources */,
+				7265CBDA1C2D125F00090E6A /* KeyMapping.swift in Sources */,
 				72019D071C2CC63E009D6E3F /* GCDTimer.swift in Sources */,
-				72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */,
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
 				7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */,
+				72019D111C2CFED0009D6E3F /* Chip8View.swift in Sources */,
 				72019D0F1C2CD637009D6E3F /* Sound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,7 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				72C78BE51C2A5BB900B36D16 /* Opcode.swift in Sources */,
+				7265CBD81C2D05C100090E6A /* HexStringUtilities.swift in Sources */,
 				72C78BE41C2A5BB900B36D16 /* Emulator.swift in Sources */,
+				7265CBD61C2D009900090E6A /* ROM.swift in Sources */,
 				72C78BE31C2A5BB900B36D16 /* Disassembler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

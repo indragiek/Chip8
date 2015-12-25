@@ -8,16 +8,15 @@ import SpriteKit
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var chip8View: SKView!
+    @IBOutlet weak var chip8View: Chip8View!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/BRIX") {
-            let emulator = Emulator(romData: data.byteArray)
-            let runner = Chip8Runner(emulator: emulator)
-            let scene = Chip8Scene(size: chip8View.bounds.size, runner: runner)
+        do {
+            let rom = try ROM(path: "/Users/Karunaratne/Downloads/c8games/BRIX")
+            chip8View.loadROM(rom)
             chip8View.showsFPS = true
-            chip8View.presentScene(scene)
+        } catch let error {
+            print(error)
         }
     }
 }
-

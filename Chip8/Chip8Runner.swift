@@ -34,7 +34,6 @@ final class Chip8Runner {
     
     private let queue = dispatch_queue_create("com.indragie.Chip8.Chip8Runner", DISPATCH_QUEUE_SERIAL)
     private let emulator: Emulator
-    private let clockRate: Double
     
     private lazy var CPUTimer: GCDTimer = {
         GCDTimer(interval: 1 / self.clockRate, queue: self.queue) { [unowned self] in
@@ -56,6 +55,10 @@ final class Chip8Runner {
             }
         }
     }()
+    
+    var clockRate: Double {
+        didSet { self.CPUTimer.interval = 1 / clockRate }
+    }
     
     // https://github.com/AfBu/haxe-chip-8-emulator/wiki/(Super)CHIP-8-Secrets
     init(emulator: Emulator, clockRate: Double = 500) {
