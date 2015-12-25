@@ -2,15 +2,13 @@
 
 import SpriteKit
 import Chip8Kit
-import Carbon
 
 final class Chip8Scene: SKScene {
-    typealias KeyMapping = Int -> Emulator.Key?
-    
     private let runner: Chip8Runner
     private let sprites: [SKSpriteNode]
-    private let keyMapping: KeyMapping
-    private let beepSound: Sound
+    
+    var keyMapping: KeyMapping
+    var beepSound: Sound
     
     // MARK: Initialization
     
@@ -40,8 +38,6 @@ final class Chip8Scene: SKScene {
         for sprite in sprites {
             addChild(sprite)
         }
-        
-        self.runner.resume()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -63,9 +59,11 @@ final class Chip8Scene: SKScene {
                     sprite.color = (pixel == 1) ? .whiteColor() : .blackColor()
                 }
             }
+            runner.redraw = false
         }
         if runner.playBeep {
             self.beepSound.playSound()
+            runner.playBeep = false
         }
     }
     
@@ -83,44 +81,5 @@ final class Chip8Scene: SKScene {
         if let key = keyMapping(Int(event.keyCode)) {
             runner.setState(pressed, forKey: key)
         }
-    }
-}
-
-private func defaultKeyMapping(code: Int) -> Emulator.Key? {
-    switch code {
-    case kVK_ANSI_1:
-        return .Num1
-    case kVK_ANSI_2:
-        return .Num2
-    case kVK_ANSI_3:
-        return .Num3
-    case kVK_ANSI_4:
-        return .C
-    case kVK_ANSI_Q:
-        return .Num4
-    case kVK_ANSI_W:
-        return .Num5
-    case kVK_ANSI_E:
-        return .Num6
-    case kVK_ANSI_R:
-        return .D
-    case kVK_ANSI_A:
-        return .Num7
-    case kVK_ANSI_S:
-        return .Num8
-    case kVK_ANSI_D:
-        return .Num9
-    case kVK_ANSI_F:
-        return .E
-    case kVK_ANSI_Z:
-        return .A
-    case kVK_ANSI_X:
-        return .Num0
-    case kVK_ANSI_C:
-        return .B
-    case kVK_ANSI_V:
-        return .F
-    default:
-        return nil
     }
 }
