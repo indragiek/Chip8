@@ -32,7 +32,7 @@ do {
 }
 ```
 
-#### Disassembler
+#### Disassembly
 
 ```swift
 import Chip8Kit
