@@ -5,16 +5,16 @@ public final class Disassembler {
         case UnrecognizedOpcode(UInt16)
     }
     
-    private let bytes: [UInt8]
+    private let rom: ROM
     
-    public init(bytes: [UInt8]) {
-        self.bytes = bytes
+    public init(rom: ROM) {
+        self.rom = rom
     }
     
     public func disassemble() throws -> [Opcode] {
         var opcodes = [Opcode]()
-        for i in 0.stride(to: bytes.count - 1, by: 2) {
-            let rawOpcode = (UInt16(bytes[i]) << 8) | UInt16(bytes[i + 1])
+        for i in 0.stride(to: rom.bytes.count - 1, by: 2) {
+            let rawOpcode = (UInt16(rom.bytes[i]) << 8) | UInt16(rom.bytes[i + 1])
             if let opcode = Opcode(rawOpcode: rawOpcode) {
                 opcodes.append(opcode)
             } else {

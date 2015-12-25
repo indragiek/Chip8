@@ -96,9 +96,8 @@ public final class Emulator {
     private var keypad = [Bool](count: Hardware.NumberOfKeys, repeatedValue: false)
     private var lastPressedKey: Key?
     
-    public init(romData: [UInt8]) {
-        let intPC = Int(pc)
-        memory.replaceRange(intPC..<(intPC + romData.count), with: romData)
+    public init(rom: ROM) {
+        memory.replaceRange(Int(pc)..<(Int(pc) + rom.bytes.count), with: rom.bytes)
     }
     
     public func setState(pressed: Bool, forKey key: Key) {
@@ -109,8 +108,7 @@ public final class Emulator {
     }
     
     public func emulateCycle() throws -> State {
-        let intPC = Int(pc)
-        let rawOpcode = (UInt16(memory[intPC]) << 8) | UInt16(memory[intPC + 1])
+        let rawOpcode = (UInt16(memory[Int(pc)]) << 8) | UInt16(memory[Int(pc) + 1])
         if let opcode = Opcode(rawOpcode: rawOpcode) {
             var incrementPC = true
             var redraw = false
