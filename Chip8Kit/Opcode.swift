@@ -1,12 +1,7 @@
 //  Copyright © 2015 Indragie Karunaratne. All rights reserved.
 
-public protocol OpcodeType {
-    var rawOpcode: UInt16 { get }
-    var textualDescription: String { get }
-}
-
 // From https://en.wikipedia.org/wiki/CHIP-8
-public enum Opcode: OpcodeType, CustomStringConvertible {
+public enum Opcode: CustomStringConvertible {
     public typealias Address = UInt16
     public typealias Register = Int
     public typealias Constant = UInt8
