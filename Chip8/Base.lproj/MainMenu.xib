@@ -14,7 +14,6 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Chip8" customModuleProvider="target">
             <connections>
-                <outlet property="chip8View" destination="HQL-EW-TBG" id="MZJ-lA-PKg"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -671,24 +670,13 @@
         <window title="Chip8" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="512" height="256"/>
+            <rect key="contentRect" x="335" y="390" width="512" height="310"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="512" height="310"/>
             <value key="maxSize" type="size" width="512" height="310"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="512" height="256"/>
+                <rect key="frame" x="0.0" y="0.0" width="512" height="310"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="HQL-EW-TBG" customClass="Chip8View" customModule="Chip8" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="512" height="256"/>
-                    </customView>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="bottom" secondItem="HQL-EW-TBG" secondAttribute="bottom" id="1vP-Qg-8uB"/>
-                    <constraint firstAttribute="trailing" secondItem="HQL-EW-TBG" secondAttribute="trailing" id="F03-8Z-b1g"/>
-                    <constraint firstItem="HQL-EW-TBG" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="SjZ-nr-2QN"/>
-                    <constraint firstItem="HQL-EW-TBG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="kcN-OJ-TCM"/>
-                </constraints>
             </view>
             <point key="canvasLocation" x="416" y="394"/>
         </window>

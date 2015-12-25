@@ -36,22 +36,25 @@ final class Chip8Runner {
     private let emulator: Emulator
     
     private lazy var CPUTimer: GCDTimer = {
-        GCDTimer(interval: 1 / self.clockRate, queue: self.queue) { [unowned self] in
+        GCDTimer(interval: 1 / self.clockRate, queue: self.queue) { [weak self] in
+            guard let strongSelf = self else { return }
             do {
-                let state = try self.emulator.emulateCycle()
+                let state = try strongSelf.emulator.emulateCycle()
                 if state.redraw {
-                    self._redraw = true
+                    strongSelf._redraw = true
                 }
-                self._screen = state.screen
+                strongSelf._screen = state.screen
             } catch let error {
                 fatalError("Emulation error: \(error)")
             }
         }
     }()
     private lazy var timerTimer: GCDTimer = {
-        GCDTimer(interval: 1 / Emulator.Hardware.TimerClockRate, queue: self.queue) { [unowned self] in
-            if self.emulator.emulateTimerTick() {
-                self._playBeep = true
+        GCDTimer(interval: 1 / Emulator.Hardware.TimerClockRate, queue: self.queue) { [weak self] in
+            guard let strongSelf = self else { return }
+            
+            if strongSelf.emulator.emulateTimerTick() {
+                strongSelf._playBeep = true
             }
         }
     }()

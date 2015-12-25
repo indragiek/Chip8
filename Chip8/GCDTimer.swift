@@ -4,6 +4,7 @@ import Dispatch
 
 final class GCDTimer {
     private let timer: dispatch_source_t
+    private var suspended = true
     var interval: Double {
         didSet { setTimer() }
     }
@@ -15,12 +16,18 @@ final class GCDTimer {
     }
     
     func resume() {
+        guard suspended else { return }
+        
         setTimer()
         dispatch_resume(timer)
+        suspended = false
     }
     
     func suspend() {
+        guard !suspended else { return }
+        
         dispatch_suspend(timer)
+        suspended = true
     }
     
     private func setTimer() {
@@ -30,5 +37,6 @@ final class GCDTimer {
     
     deinit {
         dispatch_source_cancel(timer)
+        if suspended { resume() }
     }
 }

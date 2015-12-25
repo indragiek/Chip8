@@ -8,15 +8,11 @@ import SpriteKit
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    @IBOutlet weak var chip8View: Chip8View!
+    private var windowController: NSWindowController!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        do {
-            let rom = try ROM(path: "/Users/Karunaratne/Downloads/c8games/BRIX")
-            chip8View.loadROM(rom)
-            chip8View.showsFPS = true
-        } catch let error {
-            print(error)
-        }
+        windowController = NSWindowController(window: window)
+        windowController.contentViewController = ViewController(nibName: nil, bundle: nil)
+        windowController.showWindow(nil)
     }
 }

@@ -61,6 +61,18 @@ final class Chip8View: NSView {
         self.scene = scene
     }
     
+    // MARK: NSView
+    
+    override var acceptsFirstResponder: Bool { return true }
+    
+    override func keyDown(theEvent: NSEvent) {
+        sceneView.keyDown(theEvent)
+    }
+    
+    override func keyUp(theEvent: NSEvent) {
+        sceneView.keyUp(theEvent)
+    }
+    
     // MARK: Initialization
     
     private func commonInit() {

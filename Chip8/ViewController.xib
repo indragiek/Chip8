@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ViewController" customModule="Chip8" customModuleProvider="target">
+            <connections>
+                <outlet property="chip8View" destination="zvu-7j-gZp" id="ywK-qf-Fo5"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="512" height="310"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="zvu-7j-gZp" customClass="Chip8View" customModule="Chip8" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="512" height="256"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="256" id="5e8-ui-IMW"/>
+                        <constraint firstAttribute="width" constant="512" id="iAc-oz-TbF"/>
+                    </constraints>
+                </customView>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTZ-K2-qNu">
+                    <rect key="frame" x="20" y="256" width="472" height="54"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HBj-Gs-Jgw">
+                            <rect key="frame" x="-6" y="9" width="70" height="32"/>
+                            <buttonCell key="cell" type="push" title="Load" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eEZ-0c-Wh7">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="load:" target="-2" id="fKI-Ls-bcz"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3KT-iO-KVt">
+                            <rect key="frame" x="72" y="9.5" width="75" height="32"/>
+                            <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7uO-HP-CUc">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="reset:" target="-2" id="IPb-x7-Uhn"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Dk-3h-bdQ">
+                            <rect key="frame" x="155" y="9" width="77" height="32"/>
+                            <buttonCell key="cell" type="push" title="Pause" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Orz-mY-4yb">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="pauseResume:" target="-2" id="xpA-89-dc6"/>
+                            </connections>
+                        </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IN1-Ef-dVk">
+                            <rect key="frame" x="244" y="18" width="70" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clock Rate" id="SaR-zK-2vX">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0z2-wa-jZ0">
+                            <rect key="frame" x="330" y="15" width="144" height="25"/>
+                            <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="1000" doubleValue="500" tickMarkPosition="below" numberOfTickMarks="5" sliderType="linear" id="lUD-oj-Hx6"/>
+                            <connections>
+                                <action selector="changedClockRate:" target="-2" id="AjX-ih-2bT"/>
+                            </connections>
+                        </slider>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="uTZ-K2-qNu" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="RRn-uT-PRy"/>
+                <constraint firstItem="zvu-7j-gZp" firstAttribute="top" secondItem="uTZ-K2-qNu" secondAttribute="bottom" id="Tox-nF-dCD"/>
+                <constraint firstItem="zvu-7j-gZp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="hVd-z7-EFp"/>
+                <constraint firstAttribute="bottom" secondItem="zvu-7j-gZp" secondAttribute="bottom" id="qdO-1p-dsK"/>
+                <constraint firstAttribute="trailing" secondItem="zvu-7j-gZp" secondAttribute="trailing" id="rne-KV-0Ku"/>
+                <constraint firstItem="uTZ-K2-qNu" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="tZp-fx-hIZ"/>
+                <constraint firstAttribute="trailing" secondItem="uTZ-K2-qNu" secondAttribute="trailing" constant="20" id="yBz-fD-eRA"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
