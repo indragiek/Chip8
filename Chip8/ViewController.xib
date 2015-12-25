@@ -68,7 +68,7 @@
                         </textField>
                         <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0z2-wa-jZ0">
                             <rect key="frame" x="330" y="15" width="144" height="25"/>
-                            <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1000" doubleValue="500" tickMarkPosition="below" numberOfTickMarks="5" sliderType="linear" id="lUD-oj-Hx6"/>
+                            <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="1" maxValue="1000" doubleValue="500" tickMarkPosition="below" numberOfTickMarks="5" sliderType="linear" id="lUD-oj-Hx6"/>
                             <connections>
                                 <action selector="changedClockRate:" target="-2" id="AjX-ih-2bT"/>
                             </connections>
