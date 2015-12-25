@@ -23,6 +23,7 @@ do {
 	let state = try emulator.emulateCycle()
 	
 	// Emulate a single timer tick for the sound and delay timers
+	// Should always be called at 60Hz regardless of the master clock rate
 	emulator.emulateTimerTick()
 	
 	// Pass key events to the emulator.
