@@ -26,6 +26,7 @@ private let FontSet: [UInt8] = [
     0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 ]
 
+/// Emulates the CHIP-8 virtual machine.
 public final class Emulator {
     public enum Error: ErrorType {
         case UnrecognizedOpcode(UInt16)
@@ -96,10 +97,13 @@ public final class Emulator {
     private var keypad = [Bool](count: Hardware.NumberOfKeys, repeatedValue: false)
     private var lastPressedKey: Key?
     
+    /// Designated initializer. Initializes the receiver with the ROM
+    /// containing the program to emulate.
     public init(rom: ROM) {
         memory.replaceRange(Int(pc)..<(Int(pc) + rom.bytes.count), with: rom.bytes)
     }
     
+    /// Sets the pressed state for a key on the keypad.
     public func setState(pressed: Bool, forKey key: Key) {
         keypad[Int(key.rawValue)] = pressed
         if pressed {
@@ -107,6 +111,9 @@ public final class Emulator {
         }
     }
     
+    /// Emulates a single clock cycle. This method should typically be called
+    /// at a rate of 500Hz, according to: 
+    /// https://github.com/AfBu/haxe-chip-8-emulator/wiki/(Super)CHIP-8-Secrets
     public func emulateCycle() throws -> State {
         let rawOpcode = (UInt16(memory[Int(pc)]) << 8) | UInt16(memory[Int(pc) + 1])
         if let opcode = Opcode(rawOpcode: rawOpcode) {
@@ -220,6 +227,8 @@ public final class Emulator {
         }
     }
     
+    /// Emulates a single timer tick. This should always be called at a rate
+    /// of 60Hz regardless of the master clock rate.
     public func emulateTimerTick() -> Bool {
         if delayTimer > 0 {
             delayTimer -= 1

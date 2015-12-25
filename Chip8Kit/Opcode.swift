@@ -1,6 +1,7 @@
 //  Copyright © 2015 Indragie Karunaratne. All rights reserved.
 
-// From https://en.wikipedia.org/wiki/CHIP-8
+/// Represents an opcode for the CHIP-8 virtual machine
+/// Based on the opcode table from: https://en.wikipedia.org/wiki/CHIP-8
 public enum Opcode: CustomStringConvertible {
     public typealias Address = UInt16
     public typealias Register = Int
@@ -42,6 +43,7 @@ public enum Opcode: CustomStringConvertible {
     case WriteMemory(x: Register)                           // FX55
     case ReadMemory(x: Register)                            // FX65
     
+    /// Returns the raw opcode value in big-endian byte order.
     public var rawOpcode: UInt16 {
         switch self {
         case CallMachineLanguageSubroutine(address: let addr):
@@ -117,6 +119,8 @@ public enum Opcode: CustomStringConvertible {
         }
     }
     
+    /// Returns an human readable English description of the instruction 
+    /// associated with the opcode.
     public var textualDescription: String {
         switch self {
         case CallMachineLanguageSubroutine(address: let addr):
@@ -196,6 +200,7 @@ public enum Opcode: CustomStringConvertible {
         return "Opcode{code=0x\(hex(rawOpcode)), description=\(textualDescription)}"
     }
     
+    /// Initializes the receiver with a raw opcode in big-endian byte order.
     public init?(rawOpcode: UInt16) {
         let nib1 = UInt8((rawOpcode & 0xF000) >> 12)
         let nib2 = UInt8((rawOpcode & 0x0F00) >> 8)

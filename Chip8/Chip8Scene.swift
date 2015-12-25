@@ -7,11 +7,18 @@ final class Chip8Scene: SKScene {
     private let runner: Chip8Runner
     private let sprites: [SKSpriteNode]
     
+    /// The mapping from keyboard keys to the keys on the keypad of the CHIP-8
     var keyMapping: KeyMapping
+    
+    /// The beep sound to play when the CHIP-8 sound timer hits 0.
     var beepSound: Sound
     
     // MARK: Initialization
     
+    /// Designated initializer. 
+    ///
+    /// The `size` parameter should typically be the bounding size of the view 
+    /// that the scene is being presented in.
     init(size: CGSize, runner: Chip8Runner, keyMapping: KeyMapping = defaultKeyMapping, beepSound: Sound = NSBeepSound()) {
         let rows = Emulator.Hardware.ScreenRows
         let columns = Emulator.Hardware.ScreenColumns
