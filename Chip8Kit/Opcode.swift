@@ -283,34 +283,3 @@ public enum Opcode: OpcodeType, CustomStringConvertible {
         }
     }
 }
-
-private func hex<T: UnsignedIntegerType>(value: T) -> String {
-    return String(value, radix: 16).uppercaseString
-}
-
-private func hex<T: SignedIntegerType>(value: T) -> String {
-    return String(value, radix: 16).uppercaseString
-}
-
-private extension String {
-    func zeroPrefix(length: Int) -> String {
-        let delta = length - characters.count
-        if delta <= 0 {
-            return self 
-        } else {
-            return (0..<delta).reduce("") { (str, _) in str + "0" } + self
-        }
-    }
-}
-
-extension SequenceType where Generator.Element: OpcodeType {
-    public func printDisassembly() {
-        print("ADDR  OP    DESCRIPTION")
-        print("----  ----  -----------")
-        for (index, opcode) in self.enumerate() {
-            let opaddr = hex(index * 2).zeroPrefix(4)
-            let rawOpcode = hex(opcode.rawOpcode).zeroPrefix(4)
-            print("\(opaddr)  \(rawOpcode)  \(opcode.textualDescription)")
-        }
-    }
-}
