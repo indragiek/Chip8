@@ -9,6 +9,7 @@
 import Cocoa
 import Chip8Kit
 import SpriteKit
+import Carbon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -17,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var chip8View: SKView!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/PONG") {
+        if let data = NSData(contentsOfFile: "/Users/Karunaratne/Downloads/c8games/INVADERS") {
             let emulator = Emulator(romData: data.byteArray)
             let scene = Chip8Scene(size: chip8View.bounds.size, emulator: emulator)
             chip8View.showsFPS = true

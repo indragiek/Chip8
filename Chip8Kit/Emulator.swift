@@ -50,6 +50,36 @@ public final class Emulator {
         public let beep: Bool
     }
     
+    // Default keypad layout:
+    // From http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#keyboard
+    // -----------------
+    // | 1 | 2 | 3 | C |
+    // -----------------
+    // | 4 | 5 | 6 | D |
+    // -----------------
+    // | 7 | 8 | 9 | E |
+    // -----------------
+    // | A | 0 | B | F |
+    // -----------------
+    public enum Key: UInt8 {
+        case Num0 = 0x0
+        case Num1 = 0x1
+        case Num2 = 0x2
+        case Num3 = 0x3
+        case Num4 = 0x4
+        case Num5 = 0x5
+        case Num6 = 0x6
+        case Num7 = 0x7
+        case Num8 = 0x8
+        case Num9 = 0x9
+        case A = 0xA
+        case B = 0xB
+        case C = 0xC
+        case D = 0xD
+        case E = 0xE
+        case F = 0xF
+    }
+    
     private var memory: [UInt8] = {
         var memory = [UInt8](count: Hardware.MemorySize, repeatedValue: 0)
         memory.replaceRange(0..<FontSet.count, with: FontSet)
@@ -64,11 +94,19 @@ public final class Emulator {
     private var pc = Hardware.ProgramAddress  // Program counter
     private var delayTimer: UInt8 = 0
     private var soundTimer: UInt8 = 0
-    private var key = UInt8.max
+    private var keypad = [Bool](count: Hardware.NumberOfKeys, repeatedValue: false)
+    private var lastPressedKey: Key?
     
     public init(romData: [UInt8]) {
         let intPC = Int(pc)
         memory.replaceRange(intPC..<(intPC + romData.count), with: romData)
+    }
+    
+    public func setState(pressed: Bool, forKey key: Key) {
+        keypad[Int(key.rawValue)] = pressed
+        if pressed {
+            lastPressedKey = key
+        }
     }
     
     public func emulateCycle() throws -> State {
@@ -142,16 +180,17 @@ public final class Emulator {
                 draw(xRegister: x, yRegister: y, rows: rows)
                 redraw = true
             case .SkipIfKeyPressed(x: let x):
-                if key == V[x] { pc += 2 }
+                if keypad[Int(V[x])] { pc += 2 }
             case .SkipIfKeyNotPressed(x: let x):
-                if key != V[x] { pc += 2 }
+                if !keypad[Int(V[x])] { pc += 2 }
             case .StoreDelayTimer(x: let x):
                 V[x] = delayTimer
             case .AwaitKeyPress(x: let x):
-                if key == 0 {
-                    return State(screen: screen, redraw: false, beep: false)
+                if let key = lastPressedKey {
+                    V[x] = key.rawValue
+                    lastPressedKey = nil
                 } else {
-                    V[x] = key
+                    return State(screen: screen, redraw: false, beep: false)
                 }
             case .SetDelayTimer(x: let x):
                 delayTimer = V[x]
