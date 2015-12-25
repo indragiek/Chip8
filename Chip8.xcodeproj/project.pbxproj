@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72019D071C2CC63E009D6E3F /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D061C2CC63E009D6E3F /* GCDTimer.swift */; };
+		72019D091C2CCBEF009D6E3F /* Chip8Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */; };
+		72019D0F1C2CD637009D6E3F /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72019D0E1C2CD637009D6E3F /* Sound.swift */; };
 		7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */; };
 		72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C78BB11C29D9E100B36D16 /* AppDelegate.swift */; };
 		72C78BB41C29D9E100B36D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72C78BB31C29D9E100B36D16 /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		72019D061C2CC63E009D6E3F /* GCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
+		72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8Runner.swift; sourceTree = "<group>"; };
+		72019D0E1C2CD637009D6E3F /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chip8Scene.swift; sourceTree = "<group>"; };
 		72C78BAE1C29D9E100B36D16 /* Chip8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chip8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C78BB11C29D9E100B36D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,9 @@
 				72C78BB81C29D9E100B36D16 /* Info.plist */,
 				72C78BEE1C2A6E9800B36D16 /* NSDataExtensions.swift */,
 				7217CAD51C2B3EA100D473CD /* Chip8Scene.swift */,
+				72019D081C2CCBEF009D6E3F /* Chip8Runner.swift */,
+				72019D061C2CC63E009D6E3F /* GCDTimer.swift */,
+				72019D0E1C2CD637009D6E3F /* Sound.swift */,
 			);
 			path = Chip8;
 			sourceTree = "<group>";
@@ -234,9 +243,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72019D091C2CCBEF009D6E3F /* Chip8Runner.swift in Sources */,
+				72019D071C2CC63E009D6E3F /* GCDTimer.swift in Sources */,
 				72C78BEF1C2A6E9800B36D16 /* NSDataExtensions.swift in Sources */,
 				72C78BB21C29D9E100B36D16 /* AppDelegate.swift in Sources */,
 				7217CAD61C2B3EA100D473CD /* Chip8Scene.swift in Sources */,
+				72019D0F1C2CD637009D6E3F /* Sound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

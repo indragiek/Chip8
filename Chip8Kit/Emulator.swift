@@ -41,13 +41,12 @@ public final class Emulator {
         public static let ScreenRows = 32
         public static let ScreenColumns = 64
         public static let ScreenSize = ScreenRows * ScreenColumns
-        public static let RefreshRate = 60.0
+        public static let TimerClockRate = 60.0
     }
     
     public struct State {
         public let screen: [UInt8]
         public let redraw: Bool
-        public let beep: Bool
     }
     
     // Default keypad layout:
@@ -190,7 +189,7 @@ public final class Emulator {
                     V[x] = key.rawValue
                     lastPressedKey = nil
                 } else {
-                    return State(screen: screen, redraw: false, beep: false)
+                    return State(screen: screen, redraw: false)
                 }
             case .SetDelayTimer(x: let x):
                 delayTimer = V[x]
@@ -217,20 +216,23 @@ public final class Emulator {
             if incrementPC {
                 pc += 2
             }
-            if delayTimer > 0 {
-                delayTimer -= 1
-            }
-            
-            var beep = false
-            if soundTimer > 0 {
-                beep = soundTimer == 1
-                soundTimer -= 1
-            }
-            
-            return State(screen: screen, redraw: redraw, beep: beep)
+            return State(screen: screen, redraw: redraw)
         } else {
             throw Error.UnrecognizedOpcode(rawOpcode)
         }
+    }
+    
+    public func emulateTimerTick() -> Bool {
+        if delayTimer > 0 {
+            delayTimer -= 1
+        }
+        
+        var beep = false
+        if soundTimer > 0 {
+            beep = soundTimer == 1
+            soundTimer -= 1
+        }
+        return beep
     }
     
     private func draw(xRegister xRegister: Opcode.Register, yRegister: Opcode.Register, rows: Opcode.Constant) {
