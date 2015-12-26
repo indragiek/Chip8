@@ -116,115 +116,115 @@ public final class Emulator {
     /// https://github.com/AfBu/haxe-chip-8-emulator/wiki/(Super)CHIP-8-Secrets
     public func emulateCycle() throws -> State {
         let rawOpcode = (UInt16(memory[Int(pc)]) << 8) | UInt16(memory[Int(pc) + 1])
-        if let opcode = Opcode(rawOpcode: rawOpcode) {
-            var incrementPC = true
-            var redraw = false
-            
-            switch opcode {
-            case .CallMachineLanguageSubroutine(address: _):
-                // Not implemented
-                break
-            case .ClearScreen:
-                screen = [UInt8](count: Hardware.ScreenSize, repeatedValue: 0)
-                redraw = true
-            case .Return:
-                sp -= 1
-                pc = stack[sp]
-            case .JumpAbsolute(address: let address):
-                pc = address
-                incrementPC = false
-            case .CallSubroutine(address: let address):
-                stack[sp] = pc
-                sp += 1
-                pc = address
-                incrementPC = false
-            case .SkipIfEqualValue(x: let x, value: let value):
-                if V[x] == value { pc += 2 }
-            case .SkipIfNotEqualValue(x: let x, value: let value):
-                if V[x] != value { pc += 2 }
-            case .SkipIfEqualRegister(x: let x, y: let y):
-                if V[x] == V[y] { pc += 2 }
-            case .SetValue(x: let x, value: let value):
-                V[x] = value
-            case .AddValue(x: let x, value: let value):
-                V[x] = V[x] &+ value
-            case .SetRegister(x: let x, y: let y):
-                V[x] = V[y]
-            case .Or(x: let x, y: let y):
-                V[x] |= V[y]
-            case .And(x: let x, y: let y):
-                V[x] &= V[y]
-            case .Xor(x: let x, y: let y):
-                V[x] ^= V[y]
-            case .AddRegister(x: let x, y: let y):
-                V[0xF] = (Int(V[x]) + Int(V[y]) > Int(UInt8.max)) ? 1 : 0
-                V[x] = V[x] &+ V[y]
-            case .SubtractYFromX(x: let x, y: let y):
-                V[0xF] = (V[x] < V[y]) ? 0 : 1
-                V[x] = V[x] &- V[y]
-            case .ShiftRight(x: let x, y: _):
-                V[0xf] = V[x] & 1
-                V[x] >>= 1
-            case .SubtractXFromY(x: let x, y: let y):
-                V[0xF] = (V[y] < V[x]) ? 0 : 1
-                V[x] = V[y] &- V[x]
-            case .ShiftLeft(x: let x, y: _):
-                V[0xF] = (V[x] & 0x80) >> 7
-                V[x] <<= 1
-            case .SkipIfNotEqualRegister(x: let x, y: let y):
-                if V[x] != V[y] { pc += 2 }
-            case .SetIndex(address: let address):
-                I = address
-            case .JumpRelative(address: let address):
-                pc = address + UInt16(V[0])
-                incrementPC = false
-            case .AndRandom(x: let x, value: let value):
-                V[x] = UInt8(rand() % UINT8_MAX) & value
-            case .Draw(x: let x, y: let y, rows: let rows):
-                draw(xRegister: x, yRegister: y, rows: rows)
-                redraw = true
-            case .SkipIfKeyPressed(x: let x):
-                if keypad[Int(V[x])] { pc += 2 }
-            case .SkipIfKeyNotPressed(x: let x):
-                if !keypad[Int(V[x])] { pc += 2 }
-            case .StoreDelayTimer(x: let x):
-                V[x] = delayTimer
-            case .AwaitKeyPress(x: let x):
-                if let key = lastPressedKey {
-                    V[x] = key.rawValue
-                    lastPressedKey = nil
-                } else {
-                    return State(screen: screen, redraw: false)
-                }
-            case .SetDelayTimer(x: let x):
-                delayTimer = V[x]
-            case .SetSoundTimer(x: let x):
-                soundTimer = V[x]
-            case .AddIndex(x: let x):
-                let value = UInt16(V[x])
-                V[0xF] = ((value + I) > UInt16(0xFFF)) ? 1 : 0
-                I += value
-            case .SetIndexFontCharacter(x: let x):
-                I = UInt16(V[x] * 5)
-            case .StoreBCD(x: let x):
-                storeBCD(x)
-            case .WriteMemory(x: let x):
-                for xi in 0...Int(x) {
-                    memory[Int(I) + xi] = V[xi]
-                }
-            case .ReadMemory(x: let x):
-                for xi in 0...Int(x) {
-                    V[xi] = memory[Int(I) + xi]
-                }
-            }
-            
-            if incrementPC {
-                pc += 2
-            }
-            return State(screen: screen, redraw: redraw)
-        } else {
+        guard let opcode = Opcode(rawOpcode: rawOpcode) else {
             throw Error.UnrecognizedOpcode(rawOpcode)
         }
+        
+        var incrementPC = true
+        var redraw = false
+        
+        switch opcode {
+        case .CallMachineLanguageSubroutine(address: _):
+            // Not implemented
+            break
+        case .ClearScreen:
+            screen = [UInt8](count: Hardware.ScreenSize, repeatedValue: 0)
+            redraw = true
+        case .Return:
+            sp -= 1
+            pc = stack[sp]
+        case let .JumpAbsolute(address):
+            pc = address
+            incrementPC = false
+        case let .CallSubroutine(address):
+            stack[sp] = pc
+            sp += 1
+            pc = address
+            incrementPC = false
+        case let .SkipIfEqualValue(x, value):
+            if V[x] == value { pc += 2 }
+        case let .SkipIfNotEqualValue(x, value):
+            if V[x] != value { pc += 2 }
+        case let .SkipIfEqualRegister(x, y):
+            if V[x] == V[y] { pc += 2 }
+        case let .SetValue(x, value):
+            V[x] = value
+        case let .AddValue(x, value):
+            V[x] = V[x] &+ value
+        case let .SetRegister(x, y):
+            V[x] = V[y]
+        case let .Or(x, y):
+            V[x] |= V[y]
+        case let .And(x, y):
+            V[x] &= V[y]
+        case let .Xor(x, y):
+            V[x] ^= V[y]
+        case let .AddRegister(x, y):
+            V[0xF] = (Int(V[x]) + Int(V[y]) > Int(UInt8.max)) ? 1 : 0
+            V[x] = V[x] &+ V[y]
+        case let .SubtractYFromX(x, y):
+            V[0xF] = (V[x] < V[y]) ? 0 : 1
+            V[x] = V[x] &- V[y]
+        case let .ShiftRight(x, _):
+            V[0xf] = V[x] & 1
+            V[x] >>= 1
+        case let .SubtractXFromY(x, y):
+            V[0xF] = (V[y] < V[x]) ? 0 : 1
+            V[x] = V[y] &- V[x]
+        case let .ShiftLeft(x, _):
+            V[0xF] = (V[x] & 0x80) >> 7
+            V[x] <<= 1
+        case let .SkipIfNotEqualRegister(x, y):
+            if V[x] != V[y] { pc += 2 }
+        case let .SetIndex(address):
+            I = address
+        case let .JumpRelative(address):
+            pc = address + UInt16(V[0])
+            incrementPC = false
+        case let .AndRandom(x, value):
+            V[x] = UInt8(rand() % UINT8_MAX) & value
+        case let .Draw(x, y, rows):
+            draw(xRegister: x, yRegister: y, rows: rows)
+            redraw = true
+        case let .SkipIfKeyPressed(x):
+            if keypad[Int(V[x])] { pc += 2 }
+        case let .SkipIfKeyNotPressed(x):
+            if !keypad[Int(V[x])] { pc += 2 }
+        case let .StoreDelayTimer(x):
+            V[x] = delayTimer
+        case let .AwaitKeyPress(x):
+            if let key = lastPressedKey {
+                V[x] = key.rawValue
+                lastPressedKey = nil
+            } else {
+                return State(screen: screen, redraw: false)
+            }
+        case let .SetDelayTimer(x):
+            delayTimer = V[x]
+        case let .SetSoundTimer(x):
+            soundTimer = V[x]
+        case let .AddIndex(x):
+            let value = UInt16(V[x])
+            V[0xF] = ((value + I) > UInt16(0xFFF)) ? 1 : 0
+            I += value
+        case let .SetIndexFontCharacter(x):
+            I = UInt16(V[x] * 5)
+        case let .StoreBCD(x):
+            storeBCD(x)
+        case let .WriteMemory(x):
+            for xi in 0...Int(x) {
+                memory[Int(I) + xi] = V[xi]
+            }
+        case let .ReadMemory(x):
+            for xi in 0...Int(x) {
+                V[xi] = memory[Int(I) + xi]
+            }
+        }
+        
+        if incrementPC {
+            pc += 2
+        }
+        return State(screen: screen, redraw: redraw)
     }
     
     /// Emulates a single timer tick. This should always be called at a rate

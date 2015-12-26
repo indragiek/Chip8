@@ -46,75 +46,75 @@ public enum Opcode: CustomStringConvertible {
     /// Returns the raw opcode value in big-endian byte order.
     public var rawOpcode: UInt16 {
         switch self {
-        case CallMachineLanguageSubroutine(address: let addr):
-            return addr
+        case let .CallMachineLanguageSubroutine(address):
+            return address
         case .ClearScreen:
             return 0x00E0
         case .Return:
             return 0x00EE
-        case .JumpAbsolute(address: let addr):
-            return (0x1 << 12) | addr
-        case .CallSubroutine(address: let addr):
-            return (0x2 << 12) | addr
-        case .SkipIfEqualValue(x: let x, value: let value):
+        case let .JumpAbsolute(address):
+            return (0x1 << 12) | address
+        case let .CallSubroutine(address):
+            return (0x2 << 12) | address
+        case let .SkipIfEqualValue(x, value):
             return (0x3 << 12) | (UInt16(x) << 8) | UInt16(value)
-        case .SkipIfNotEqualValue(x: let x, value: let value):
+        case let .SkipIfNotEqualValue(x, value):
             return (0x4 << 12) | (UInt16(x) << 8) | UInt16(value)
-        case .SkipIfEqualRegister(x: let x, y: let y):
+        case let .SkipIfEqualRegister(x, y):
             return (0x5 << 12) | (UInt16(x) << 8) | (UInt16(y) << 4)
-        case .SetValue(x: let x, value: let value):
+        case let .SetValue(x, value):
             return (0x6 << 12) | (UInt16(x) << 8) | UInt16(value)
-        case .AddValue(x: let x, value: let value):
+        case let .AddValue(x, value):
             return (0x7 << 12) | (UInt16(x) << 8) | UInt16(value)
-        case .SetRegister(x: let x, y: let y):
+        case let .SetRegister(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8)
-        case .Or(x: let x, y: let y):
+        case let .Or(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x1
-        case .And(x: let x, y: let y):
+        case let .And(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x2
-        case .Xor(x: let x, y: let y):
+        case let .Xor(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x3
-        case .AddRegister(x: let x, y: let y):
+        case let .AddRegister(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x4
-        case .SubtractYFromX(x: let x, y: let y):
+        case let .SubtractYFromX(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x5
-        case .ShiftRight(x: let x, y: let y):
+        case let .ShiftRight(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x6
-        case .SubtractXFromY(x: let x, y: let y):
+        case let .SubtractXFromY(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0x7
-        case .ShiftLeft(x: let x, y: let y):
+        case let .ShiftLeft(x, y):
             return (0x8 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | 0xE
-        case .SkipIfNotEqualRegister(x: let x, y: let y):
+        case let .SkipIfNotEqualRegister(x, y):
             return (0x9 << 12) | (UInt16(x) << 8) | (UInt16(y) << 8)
-        case .SetIndex(address: let addr):
-            return (0xA << 12) | addr
-        case .JumpRelative(address: let addr):
-            return (0xB << 12) | addr
-        case .AndRandom(x: let x, value: let value):
+        case let .SetIndex(address):
+            return (0xA << 12) | address
+        case let .JumpRelative(address):
+            return (0xB << 12) | address
+        case let .AndRandom(x, value):
             return (0xC << 12) | (UInt16(x) << 8) | UInt16(value)
-        case .Draw(x: let x, y: let y, rows: let rows):
+        case let .Draw(x, y, rows):
             return (0xD << 12) | (UInt16(x) << 8) | (UInt16(y) << 8) | UInt16(rows)
-        case .SkipIfKeyPressed(x: let x):
+        case let .SkipIfKeyPressed(x):
             return (0xE << 12) | (UInt16(x) << 8) | 0x9E
-        case .SkipIfKeyNotPressed(x: let x):
+        case let .SkipIfKeyNotPressed(x):
             return (0xE << 12) | (UInt16(x) << 8) | 0xA1
-        case .StoreDelayTimer(x: let x):
+        case let .StoreDelayTimer(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x7
-        case .AwaitKeyPress(x: let x):
+        case let .AwaitKeyPress(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0xA
-        case .SetDelayTimer(x: let x):
+        case let .SetDelayTimer(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x15
-        case .SetSoundTimer(x: let x):
+        case let .SetSoundTimer(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x18
-        case .AddIndex(x: let x):
+        case let .AddIndex(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x1E
-        case .SetIndexFontCharacter(x: let x):
+        case let .SetIndexFontCharacter(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x29
-        case .StoreBCD(x: let x):
+        case let .StoreBCD(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x33
-        case .WriteMemory(x: let x):
+        case let .WriteMemory(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x55
-        case .ReadMemory(x: let x):
+        case let .ReadMemory(x):
             return (0xF << 12) | (UInt16(x) << 8) | 0x65
         }
     }
@@ -123,75 +123,75 @@ public enum Opcode: CustomStringConvertible {
     /// associated with the opcode.
     public var textualDescription: String {
         switch self {
-        case CallMachineLanguageSubroutine(address: let addr):
-            return "Calls the machine language subroutine at 0x\(hex(addr))"
+        case let .CallMachineLanguageSubroutine(address):
+            return "Calls the machine language subroutine at 0x\(hex(address))"
         case .ClearScreen:
             return "Clears the screen"
         case .Return:
             return "Returns from a subroutine"
-        case .JumpAbsolute(address: let addr):
-            return "Jumps to address 0x\(hex(addr))"
-        case .CallSubroutine(address: let addr):
-            return "Calls subroutine at 0x\(hex(addr))"
-        case .SkipIfEqualValue(x: let x, value: let value):
+        case let .JumpAbsolute(address):
+            return "Jumps to address 0x\(hex(address))"
+        case let .CallSubroutine(address):
+            return "Calls subroutine at 0x\(hex(address))"
+        case let .SkipIfEqualValue(x, value):
             return "Skips the next rawOpcode if V\(hex(x)) equals \(value)"
-        case .SkipIfNotEqualValue(x: let x, value: let value):
+        case let .SkipIfNotEqualValue(x, value):
             return "Skips the next rawOpcode if V\(hex(x)) doesn't equal \(value)"
-        case .SkipIfEqualRegister(x: let x, y: let y):
+        case let .SkipIfEqualRegister(x, y):
             return "Skips the next rawOpcode if V\(hex(x)) equals V\(hex(y))"
-        case .SetValue(x: let x, value: let value):
+        case let .SetValue(x, value):
             return "Sets V\(hex(x)) to \(value)"
-        case .AddValue(x: let x, value: let value):
+        case let .AddValue(x, value):
             return "Adds \(value) to V\(hex(x))"
-        case .SetRegister(x: let x, y: let y):
+        case let .SetRegister(x, y):
             return "Sets V\(hex(x)) to the value of V\(hex(y))"
-        case .Or(x: let x, y: let y):
+        case let .Or(x, y):
             return "Sets V\(hex(x)) to V\(hex(x)) OR V\(hex(y))"
-        case .And(x: let x, y: let y):
+        case let .And(x, y):
             return "Sets V\(hex(x)) to V\(hex(x)) AND V\(hex(y))"
-        case .Xor(x: let x, y: let y):
+        case let .Xor(x, y):
             return "Sets V\(hex(x)) to V\(hex(x)) XOR V\(hex(y))"
-        case .AddRegister(x: let x, y: let y):
+        case let .AddRegister(x, y):
             return "Adds V\(hex(y)) to V\(hex(x)). VF = carry bit"
-        case .SubtractYFromX(x: let x, y: let y):
+        case let .SubtractYFromX(x, y):
             return "Set V\(hex(x)) to V\(hex(x)) - V\(hex(y)). VF = borrow bit"
-        case .ShiftRight(x: let x, y: _):
+        case let .ShiftRight(x, y: _):
             return "Shift V\(hex(x)) right by 1. VF = LSB of V\(hex(x)) before shift"
-        case .SubtractXFromY(x: let x, y: let y):
+        case let .SubtractXFromY(x, y):
             return "Set V\(hex(x)) to V\(hex(y)) - V\(hex(x)). VF = borrow bit"
-        case .ShiftLeft(x: let x, y: _):
+        case let .ShiftLeft(x, y: _):
             return "Shift V\(hex(x)) left by 1. VF = MSB of V\(hex(x)) before shift"
-        case .SkipIfNotEqualRegister(x: let x, y: let y):
+        case let .SkipIfNotEqualRegister(x, y):
             return "Skips the next rawOpcode if V\(hex(x)) doesn't equal V\(hex(y))"
-        case .SetIndex(address: let addr):
-            return "Sets I to the address 0x\(hex(addr))"
-        case .JumpRelative(address: let addr):
-            return "Jumps to the address 0x\(hex(addr)) + V0"
-        case .AndRandom(x: let x, value: let value):
+        case let .SetIndex(address):
+            return "Sets I to the address 0x\(hex(address))"
+        case let .JumpRelative(address):
+            return "Jumps to the address 0x\(hex(address)) + V0"
+        case let .AndRandom(x, value):
             return "Sets V\(hex(x)) to <random number> AND \(value)"
-        case .Draw(x: let x, y: let y, rows: let rows):
+        case let .Draw(x, y, rows):
             return "Draws sprites starting at (V\(hex(x)), V\(hex(y))) for \(rows) rows"
-        case .SkipIfKeyPressed(x: let x):
+        case let .SkipIfKeyPressed(x):
             return "Skips the next rawOpcode if the key stored in V\(hex(x)) is pressed"
-        case .SkipIfKeyNotPressed(x: let x):
+        case let .SkipIfKeyNotPressed(x):
             return "Skips the next rawOpcode if the key stored in V\(hex(x)) is not pressed"
-        case .StoreDelayTimer(x: let x):
+        case let .StoreDelayTimer(x):
             return "Stores the value of the delay timer in V\(hex(x))"
-        case .AwaitKeyPress(x: let x):
+        case let .AwaitKeyPress(x):
             return "Await a key press and store it in V\(hex(x))"
-        case .SetDelayTimer(x: let x):
+        case let .SetDelayTimer(x):
             return "Sets the delay timer to V\(hex(x))"
-        case .SetSoundTimer(x: let x):
+        case let .SetSoundTimer(x):
             return "Sets the sound timer to V\(hex(x))"
-        case .AddIndex(x: let x):
+        case let .AddIndex(x):
             return "Adds V\(hex(x)) to I"
-        case .SetIndexFontCharacter(x: let x):
+        case let .SetIndexFontCharacter(x):
             return "Sets I to the location of the sprite for the character in V\(hex(x))"
-        case .StoreBCD(x: let x):
+        case let .StoreBCD(x):
             return "Store the Binary-coded decimal representation of V\(hex(x)) in V\(hex(x))"
-        case .WriteMemory(x: let x):
+        case let .WriteMemory(x):
             return "Stores V0 to V\(hex(x)) in memory starting at address I"
-        case .ReadMemory(x: let x):
+        case let .ReadMemory(x):
             return "Fills V0 to V\(hex(x)) with values from memory starting at address I"
         }
     }
@@ -218,65 +218,65 @@ public enum Opcode: CustomStringConvertible {
             self = .JumpAbsolute(address: rawOpcode & 0xFFF)
         case (0x2, _, _, _):
             self = .CallSubroutine(address: rawOpcode & 0xFFF)
-        case (0x3, let x, _, _):
+        case let (0x3, x, _, _):
             self = .SkipIfEqualValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
-        case (0x4, let x, _, _):
+        case let (0x4, x, _, _):
             self = .SkipIfNotEqualValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
-        case (0x5, let x, let y, 0x0):
+        case let (0x5, x, y, 0x0):
             self = .SkipIfEqualRegister(x: Int(x), y: Int(y))
-        case (0x6, let x, _, _):
+        case let (0x6, x, _, _):
             self = .SetValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
-        case (0x7, let x, _, _):
+        case let (0x7, x, _, _):
             self = .AddValue(x: Int(x), value: UInt8(rawOpcode & 0xFF))
-        case (0x8, let x, let y, 0x0):
+        case let (0x8, x, y, 0x0):
             self = .SetRegister(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x1):
+        case let (0x8, x, y, 0x1):
             self = .Or(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x2):
+        case let (0x8, x, y, 0x2):
             self = .And(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x3):
+        case let (0x8, x, y, 0x3):
             self = .Xor(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x4):
+        case let (0x8, x, y, 0x4):
             self = .AddRegister(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x5):
+        case let (0x8, x, y, 0x5):
             self = .SubtractYFromX(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x6):
+        case let (0x8, x, y, 0x6):
             self = .ShiftRight(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0x7):
+        case let (0x8, x, y, 0x7):
             self = .SubtractXFromY(x: Int(x), y: Int(y))
-        case (0x8, let x, let y, 0xE):
+        case let (0x8, x, y, 0xE):
             self = .ShiftLeft(x: Int(x), y: Int(y))
-        case (0x9, let x, let y, 0x0):
+        case let (0x9, x, y, 0x0):
             self = .SkipIfNotEqualRegister(x: Int(x), y: Int(y))
         case (0xA, _, _, _):
             self = .SetIndex(address: rawOpcode & 0xFFF)
         case (0xB, _, _, _):
             self = .JumpRelative(address: rawOpcode & 0xFFF)
-        case (0xC, let x, _, _):
+        case let (0xC, x, _, _):
             self = .AndRandom(x: Int(x), value: UInt8(rawOpcode & 0xFF))
-        case (0xD, let x, let y, let rows):
+        case let (0xD, x, y, rows):
             self = .Draw(x: Int(x), y: Int(y), rows: rows)
-        case (0xE, let x, 0x9, 0xE):
+        case let (0xE, x, 0x9, 0xE):
             self = .SkipIfKeyPressed(x: Int(x))
-        case (0xE, let x, 0xA, 0x1):
+        case let (0xE, x, 0xA, 0x1):
             self = .SkipIfKeyNotPressed(x: Int(x))
-        case (0xF, let x, 0x0, 0x7):
+        case let (0xF, x, 0x0, 0x7):
             self = .StoreDelayTimer(x: Int(x))
-        case (0xF, let x, 0x0, 0xA):
+        case let (0xF, x, 0x0, 0xA):
             self = .AwaitKeyPress(x: Int(x))
-        case (0xF, let x, 0x1, 0x5):
+        case let (0xF, x, 0x1, 0x5):
             self = .SetDelayTimer(x: Int(x))
-        case (0xF, let x, 0x1, 0x8):
+        case let (0xF, x, 0x1, 0x8):
             self = .SetSoundTimer(x: Int(x))
-        case (0xF, let x, 0x1, 0xE):
+        case let (0xF, x, 0x1, 0xE):
             self = .AddIndex(x: Int(x))
-        case (0xF, let x, 0x2, 0x9):
+        case let (0xF, x, 0x2, 0x9):
             self = .SetIndexFontCharacter(x: Int(x))
-        case (0xF, let x, 0x3, 0x3):
+        case let (0xF, x, 0x3, 0x3):
             self = .StoreBCD(x: Int(x))
-        case (0xF, let x, 0x5, 0x5):
+        case let (0xF, x, 0x5, 0x5):
             self = .WriteMemory(x: Int(x))
-        case (0xF, let x, 0x6, 0x5):
+        case let (0xF, x, 0x6, 0x5):
             self = .ReadMemory(x: Int(x))
         default:
             return nil
